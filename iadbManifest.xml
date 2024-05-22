@@ -23,7 +23,7 @@
   <FormSettings>
     <Form xsi:type="ItemRead">
       <DesktopSettings>
-        <SourceLocation DefaultValue="https://your-username.github.io/your-repo/your-addin.html" />
+        <SourceLocation DefaultValue="https://raw.githubusercontent.com/Rodrijr/microsoft-add-in/main/src/taskpane/taskpane.html" />
       </DesktopSettings>
     </Form>
   </FormSettings>
