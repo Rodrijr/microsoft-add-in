@@ -47,7 +47,6 @@
     <Hosts>
       <Host xsi:type="MailHost">
         <DesktopFormFactor>
-          <FunctionFile resid="Commands.Url"/>
           <ExtensionPoint xsi:type="MessageReadCommandSurface">
             <OfficeTab id="TabDefault">
               <Group id="msgReadGroup">
@@ -75,13 +74,11 @@
     </Hosts>
     <Resources>
       <bt:Images>
-
         <bt:Image id="Icon.16x16" DefaultValue="https://raw.githubusercontent.com/Rodrijr/microsoft-add-in/0cccf0a90afe51b0a62e7772fde82a69483d8dc5/assets/icon-16.png"/>
         <bt:Image id="Icon.32x32" DefaultValue="https://raw.githubusercontent.com/Rodrijr/microsoft-add-in/0cccf0a90afe51b0a62e7772fde82a69483d8dc5/assets/icon-32.png"/>
         <bt:Image id="Icon.80x80" DefaultValue="https://raw.githubusercontent.com/Rodrijr/microsoft-add-in/0cccf0a90afe51b0a62e7772fde82a69483d8dc5/assets/icon-80.png"/>
       </bt:Images>
       <bt:Urls>
-        <bt:Url id="Commands.Url" DefaultValue="https://raw.githubusercontent.com/Rodrijr/microsoft-add-in/0cccf0a90afe51b0a62e7772fde82a69483d8dc5/commands.html"/>
         <bt:Url id="Taskpane.Url" DefaultValue="https://iadbdev.service-now.com/sp?id=sc_cat_item&amp;sys_id=26f5a7a61b35351026645535624bcba6&amp;s=3291613e1bf3ed90079364abbc4bcb5b&amp;search=fe91613e1bf3ed90079364abbc4bcb59"/>
       </bt:Urls>
       <bt:ShortStrings>
@@ -90,7 +87,6 @@
       </bt:ShortStrings>
       <bt:LongStrings>
         <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Click to view details in ServiceNow."/>
-        <bt:String id="ActionButton.Tooltip" DefaultValue="Click to perform an action."/>
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>
