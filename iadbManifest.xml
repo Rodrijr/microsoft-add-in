@@ -5,8 +5,8 @@
            xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides/1.0"
            xsi:type="MailApp">
 
-  <Id>fa112f69-4608-4f2c-b69d-b7b76bc03391</Id>
-  <Version>1.0.0.2</Version>
+  <Id>fa112f69-4608-4f2c-b69d-b7b76bc03389</Id>
+  <Version>1.0.0.1</Version>
   <ProviderName>Contoso</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="ServiceNow Viewer 2"/>
