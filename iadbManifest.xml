@@ -6,16 +6,16 @@
            xsi:type="MailApp">
 
   <Id>fa112f69-4608-4f2c-b69d-b7b76bc03388</Id>
-  <Version>1.0.0.2</Version>
+  <Version>1.0.0.3</Version>
   <ProviderName>Contoso</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
-  <DisplayName DefaultValue="ServiceNow Viewer 1.0.0.2"/>
+  <DisplayName DefaultValue="ServiceNow Viewer 2"/>
   <Description DefaultValue="View ServiceNow data directly from Outlook."/>
   <IconUrl DefaultValue="https://raw.githubusercontent.com/Rodrijr/microsoft-add-in/0cccf0a90afe51b0a62e7772fde82a69483d8dc5/assets/icon-64.png"/>
   <HighResolutionIconUrl DefaultValue="https://raw.githubusercontent.com/Rodrijr/microsoft-add-in/0cccf0a90afe51b0a62e7772fde82a69483d8dc5/assets/icon-128.png"/>
   <SupportUrl DefaultValue="https://www.contoso.com/help"/>
   <AppDomains>
-    <AppDomain>https://iadbdev.service-now.com</AppDomain>
+    <AppDomain>https://www.youtube.com</AppDomain>
   </AppDomains>
   <Hosts>
     <Host Name="Mailbox"/>
@@ -28,7 +28,7 @@
   <FormSettings>
     <Form xsi:type="ItemRead">
       <DesktopSettings>
-        <SourceLocation DefaultValue="https://iadbdev.service-now.com/x_nuvo_eam_fm_view_v2.do?app=user#?s=953e41c41b25b41030cb0f6cdc4bcbb0&amp;search=113e41c41b25b41030cb0f6cdc4bcbb0&amp;view=default"/>
+        <SourceLocation DefaultValue="https://www.youtube.com/embed/-T1-doYgNGw"/>
         <RequestedHeight>450</RequestedHeight>
       </DesktopSettings>
     </Form>
@@ -79,7 +79,7 @@
         <bt:Image id="Icon.80x80" DefaultValue="https://raw.githubusercontent.com/Rodrijr/microsoft-add-in/0cccf0a90afe51b0a62e7772fde82a69483d8dc5/assets/icon-80.png"/>
       </bt:Images>
       <bt:Urls>
-        <bt:Url id="Taskpane.Url" DefaultValue="https://iadbdev.service-now.com/sp?id=sc_cat_item&amp;sys_id=26f5a7a61b35351026645535624bcba6&amp;s=3291613e1bf3ed90079364abbc4bcb5b&amp;search=fe91613e1bf3ed90079364abbc4bcb59"/>
+        <bt:Url id="Taskpane.Url" DefaultValue="https://www.youtube.com/embed/-T1-doYgNGw"/>
       </bt:Urls>
       <bt:ShortStrings>
         <bt:String id="GroupLabel" DefaultValue="ServiceNow Integration"/>
