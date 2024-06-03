@@ -9,7 +9,7 @@
   <Version>1.0.0.4</Version>
   <ProviderName>Contoso</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
-  <DisplayName DefaultValue="ServiceNow Viewer 2"/>
+  <DisplayName DefaultValue="ServiceNow Viewer 3"/>
   <Description DefaultValue="View ServiceNow data directly from Outlook."/>
   <IconUrl DefaultValue="https://rodrijr.github.io/microsoft-add-in/assets/icon-64.png"/>
   <HighResolutionIconUrl DefaultValue="https://rodrijr.github.io/microsoft-add-in/assets/icon-128.png"/>
