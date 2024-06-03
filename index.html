@@ -5,11 +5,64 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ServiceNow Viewer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      margin: 5px 0;
+    }
+
+    a {
+      color: #1a0dab;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 
 <body>
-  <h1>Welcome to ServiceNow Viewer</h1>
-  <p>This is the index page.</p>
+  <h1>ServiceNow Viewer Files</h1>
+  <ul>
+    <li><a href="manifest.xml">Manifest XML</a></li>
+    <li>
+      <strong>Assets:</strong>
+      <ul>
+        <li><a href="assets/icon-16.png">Icon 16x16</a></li>
+        <li><a href="assets/icon-32.png">Icon 32x32</a></li>
+        <li><a href="assets/icon-80.png">Icon 80x80</a></li>
+      </ul>
+    </li>
+    <li>
+      <strong>Source Files:</strong>
+      <ul>
+        <li><a href="src/taskpane/taskpane.html">Taskpane HTML</a></li>
+        <li><a href="src/commands.html">Commands HTML</a></li>
+      </ul>
+    </li>
+    <li>
+      <strong>Root Files:</strong>
+      <ul>
+        <li><a href="/index.html">index HTML</a></li>
+        <li><a href="/manifest.xml">Manifest HTML</a></li>
+        <li><a href="/iadbManifest.xml">iadbManifest HTML</a></li>
+      </ul>
+    </li>
+  </ul>
 </body>
 
 </html>
