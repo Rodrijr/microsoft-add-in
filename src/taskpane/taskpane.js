@@ -20,6 +20,7 @@ export async function run() {
   var el = document.createElement("iframe");
   el.src = 'https://iadbdev.service-now.com/x_nuvo_eam_fm_view_v2.do?app=user#?s=60a9c6c31b4460504e9886e9cd4bcbe1&search=aca9c6c31b4460504e9886e9cd4bcbe0&view=default&label_size=8&qr=true';
   el.id = 'miIframe';
+  el.referrerpolicy = "strict-origin-when-cross-origin";
   document.getElementById("miIframe")?.remove();
   document.getElementById("preview").appendChild(el);
 
