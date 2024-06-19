@@ -31,6 +31,7 @@
       <DesktopSettings>
         <SourceLocation DefaultValue="https://rodrijr.github.io/microsoft-add-in/src/taskpane/taskpane.html"/>
         <RequestedHeight>450</RequestedHeight>
+        <RequestedWidth>750</RequestedWidth>
       </DesktopSettings>
     </Form>
   </FormSettings>
