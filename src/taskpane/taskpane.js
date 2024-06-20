@@ -18,9 +18,12 @@ const instance = axios.create({
 console.log('AAAAAAAAAAAAAFUERA 2');
 
 Office.onReady((info) => {
+  console.log('info.host', info.host)
+  console.log('Office.HostType.Outlook', Office.HostType.Outlook)
   if (info.host === Office.HostType.Outlook) {
-    run();
   }
+  console.log('Office.onReady')
+  run();
 });
 
 async function run() {
@@ -41,5 +44,5 @@ async function run() {
   const item = Office.context.mailbox.item;
   document.getElementById("item-subject").innerHTML = "<b>Subject:</b> <br/>" + item.subject;
 }
-
+run();
 console.log('AAAAAAAAAAAAAFUERA');
