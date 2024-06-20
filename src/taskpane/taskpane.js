@@ -24,7 +24,7 @@ Office.onReady((info) => {
 
   }
   const item = Office.context.mailbox.item;
-  subject = item.subject;
+  subject = getLocationCode(item.subject);
   console.log('Office.onReady')
   run();
 });
@@ -37,9 +37,7 @@ function getLocationCode(input) {
 }
 async function run() {
   try {
-
-    var locationCode = getLocationCode(subject);
-    locationCode = locationCode ? locationCode : 'NE1075';
+    const locationCode = subject ? subject : 'NE1075';
     if (locationCode) {
       var { data } = await instance.get('now/table/x_nuvo_eam_elocation?sysparm_fields=sys_id&sysparm_limit=1&location_code=' + locationCode)
       console.log('>>>>>', data[0]);
