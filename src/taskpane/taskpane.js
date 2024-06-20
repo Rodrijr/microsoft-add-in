@@ -38,8 +38,11 @@ function getLocationCode(input) {
 async function run() {
   try {
     const locationCode = subject ? subject : 'NE1075';
+    console.log('locationCode', locationCode)
     if (locationCode) {
-      var { data } = await instance.get('now/table/x_nuvo_eam_elocation?sysparm_fields=sys_id&sysparm_limit=1&location_code=' + locationCode)
+      var response= await instance.get('now/table/x_nuvo_eam_elocation?sysparm_fields=sys_id&sysparm_limit=1&location_code=' + locationCode)
+      console.log('JRBP -> response:', response);
+      var { data } = response;
       console.log('>>>>>', data[0]);
       if (data && data[0]) {
         var sys_id = data[0].sys_id
@@ -48,7 +51,6 @@ async function run() {
         el.id = 'miIframe';
         el.referrerpolicy = "strict-origin-when-cross-origin";
         var a = document.getElementById("miIframe")?.remove();
-
         document.getElementById("preview").appendChild(el);
         const item = Office.context.mailbox.item;
       }
