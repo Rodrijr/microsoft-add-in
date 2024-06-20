@@ -2,10 +2,7 @@
  * Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
  * See LICENSE in the project root for license information.
  */
-
 /* global document, Office */
-import axios from 'axios';
-
 console.log('AAAAAAAAAAAAAFUERA 1')
 
 const instance = axios.create({
