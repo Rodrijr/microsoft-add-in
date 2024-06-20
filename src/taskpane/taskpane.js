@@ -42,8 +42,8 @@ async function run() {
     if (locationCode) {
       var response= await instance.get('now/table/x_nuvo_eam_elocation?sysparm_fields=sys_id&sysparm_limit=1&location_code=' + locationCode)
       console.log('JRBP -> response:', response);
-      var  data = response.data;
-      console.log('>>>>>', data[0]);
+      var data = response.data;
+      console.log('>>>>> 1 ', data);
       if (data && data[0]) {
         var sys_id = data[0].sys_id
         var el = document.createElement("iframe");
