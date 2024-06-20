@@ -3,12 +3,7 @@
  * See LICENSE in the project root for license information.
  */
 /* global document, Office */
-console.log('AAAAAAAAAAAAAFUERA 1')
-console.log('AAAAAAAAAAAAAFUERA 1')
-console.log('AAAAAAAAAAAAAFUERA 1')
-console.log('AAAAAAAAAAAAAFUERA 1')
-console.log('AAAAAAAAAAAAAFUERA 1')
-
+console.log('AAAAAAAAAAAAAFUERA 1');
 
 const instance = axios.create({
   baseURL: 'https://iadbdev.service-now.com/api/',
@@ -20,7 +15,7 @@ const instance = axios.create({
   }
 });
 
-console.log('AAAAAAAAAAAAAFUERA 2')
+console.log('AAAAAAAAAAAAAFUERA 2');
 
 Office.onReady((info) => {
   if (info.host === Office.HostType.Outlook) {
@@ -28,13 +23,13 @@ Office.onReady((info) => {
   }
 });
 
-export async function run() {
-  console.log('AAAAAAAAAAAAAAAAAQQQQQQQQQQQQQQQUIIIIIIIIIIIIIIII')
+async function run() {
+  console.log('AAAAAAAAAAAAAAAAAQQQQQQQQQQQQQQQUIIIIIIIIIIIIIIII');
   instance.get('now/table/x_nuvo_eam_elocation?sysparm_fields=sys_id&sysparm_limit=1&location_code=NE0C31')
     .then((response) => {
-      console.log('>>>>>', response)
+      console.log('>>>>>', response);
     }).catch(error => {
-      console.log('error >>>>>>>>>', error)
+      console.log('error >>>>>>>>>', error);
     });
 
   var el = document.createElement("iframe");
