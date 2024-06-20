@@ -6,12 +6,8 @@
 /* global document, Office */
 import axios from 'axios';
 
-// Office.onReady((info) => {
-//   if (info.host === Office.HostType.Outlook) {
-//     run();
-//   }
-// });
 console.log('AAAAAAAAAAAAAFUERA 1')
+
 const instance = axios.create({
   baseURL: 'https://iadbdev.service-now.com/api/',
   timeout: 1000,
@@ -21,20 +17,23 @@ const instance = axios.create({
     'Authorization': 'Basic ' + btoa('autocad_integration' + ':' + 'AutoCadIntegration67=')
   }
 });
+
 console.log('AAAAAAAAAAAAAFUERA 2')
 
+Office.onReady((info) => {
+  if (info.host === Office.HostType.Outlook) {
+    run();
+  }
+});
+
 export async function run() {
-  /**
-   * Insert your Outlook code here
-   */
   console.log('AAAAAAAAAAAAAAAAAQQQQQQQQQQQQQQQUIIIIIIIIIIIIIIII')
   instance.get('now/table/x_nuvo_eam_elocation?sysparm_fields=sys_id&sysparm_limit=1&location_code=NE0C31')
     .then((response) => {
       console.log('>>>>>', response)
     }).catch(error => {
       console.log('error >>>>>>>>>', error)
-    })
-
+    });
 
   var el = document.createElement("iframe");
   el.src = 'https://iadbdev.service-now.com/x_nuvo_eam_fm_view_v2.do?app=user#?s=60a9c6c31b4460504e9886e9cd4bcbe1&search=aca9c6c31b4460504e9886e9cd4bcbe0&view=default&label_size=8&qr=true';
@@ -46,5 +45,4 @@ export async function run() {
   document.getElementById("item-subject").innerHTML = "<b>Subject:</b> <br/>" + item.subject;
 }
 
-run();
-console.log('AAAAAAAAAAAAAFUERA')
+console.log('AAAAAAAAAAAAAFUERA');
