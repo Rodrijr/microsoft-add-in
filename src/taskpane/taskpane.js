@@ -26,6 +26,7 @@ export async function run() {
   /**
    * Insert your Outlook code here
    */
+  console.log('AAAAAAAAAAAAAAAAAQQQQQQQQQQQQQQQUIIIIIIIIIIIIIIII')
   instance.get('https://iadbdev.service-now.com/api/now/table/x_nuvo_eam_elocation?sysparm_fields=sys_id&sysparm_limit=1&location_code=NE0C31')
     .then((response) => {
       console.log('>>>>>', response)
@@ -43,3 +44,6 @@ export async function run() {
   const item = Office.context.mailbox.item;
   document.getElementById("item-subject").innerHTML = "<b>Subject:</b> <br/>" + item.subject;
 }
+
+run();
+console.log('AAAAAAAAAAAAAFUERA')
