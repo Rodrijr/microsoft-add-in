@@ -3,12 +3,7 @@
  * See LICENSE in the project root for license information.
  */
 /* global document, Office */
-document.addEventListener("DOMContentLoaded", function () {
-  var container = document.querySelector('.container');
-  var taskpaneWidth = window.innerWidth * 0.8; // 80% of the window width
-  container.style.width = taskpaneWidth + 'px';
-});
-
+console.log('AAAAAAAAAAAAAFUERA 1');
 
 const instance = axios.create({
   baseURL: 'https://iadbdev.service-now.com/api/',
