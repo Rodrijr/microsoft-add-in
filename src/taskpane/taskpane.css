@@ -16,6 +16,11 @@ ul {
   padding: 0;
 }
 
+.container {
+  width: 80%; /* Adjust this percentage to your needs */
+  margin: 0 auto; /* Center the container */
+}
+
 .ms-welcome__header {
   padding: 20px;
   padding-bottom: 30px;
