@@ -78,7 +78,7 @@ ul {
 b {
   font-weight: bold;
 }
-#miIframe {
+#miIframe, #preview {
   height: 100vh !important;
   width: 100vw !important;
 }

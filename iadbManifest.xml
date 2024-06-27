@@ -6,16 +6,15 @@
            xsi:type="MailApp">
 
   <Id>fa112f69-4608-4f2c-b69d-b7b76bc03388</Id>
-  <Version>1.0.0.4</Version>
-  <ProviderName>Contoso</ProviderName>
+  <Version>1.0.0.6</Version>
+  <ProviderName>IADB</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
-  <DisplayName DefaultValue="ServiceNow Viewer 3"/>
+  <DisplayName DefaultValue="IADB Location finder"/>
   <Description DefaultValue="View ServiceNow data directly from Outlook."/>
   <IconUrl DefaultValue="https://rodrijr.github.io/microsoft-add-in/assets/icon-64.png"/>
   <HighResolutionIconUrl DefaultValue="https://rodrijr.github.io/microsoft-add-in/assets/icon-128.png"/>
-  <SupportUrl DefaultValue="https://www.contoso.com/help"/>
+  <SupportUrl DefaultValue="https://iadbdev.service-now.com/"/>
   <AppDomains>
-    <AppDomain>https://www.contoso.com</AppDomain>
     <AppDomain>https://iadbdev.service-now.com</AppDomain>
   </AppDomains>
   <Hosts>
@@ -29,7 +28,7 @@
   <FormSettings>
     <Form xsi:type="ItemRead">
       <DesktopSettings>
-        <SourceLocation DefaultValue="https://rodrijr.github.io/microsoft-add-in/src/taskpane/taskpane.html"/>
+        <SourceLocation DefaultValue="https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do"/>
         <RequestedHeight>450</RequestedHeight>
       </DesktopSettings>
     </Form>
@@ -48,7 +47,6 @@
     <Hosts>
       <Host xsi:type="MailHost">
         <DesktopFormFactor>
-          <FunctionFile resid="Commands.Url"/>
           <ExtensionPoint xsi:type="MessageReadCommandSurface">
             <OfficeTab id="TabDefault">
               <Group id="msgReadGroup">
@@ -81,11 +79,10 @@
         <bt:Image id="Icon.80x80" DefaultValue="https://rodrijr.github.io/microsoft-add-in/assets/icon-80.png"/>
       </bt:Images>
       <bt:Urls>
-        <bt:Url id="Commands.Url" DefaultValue="https://rodrijr.github.io/microsoft-add-in/commands.html"/>
-        <bt:Url id="Taskpane.Url" DefaultValue="https://rodrijr.github.io/microsoft-add-in/src/taskpane/taskpane.html"/>
+        <bt:Url id="Taskpane.Url" DefaultValue="https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do"/>
       </bt:Urls>
       <bt:ShortStrings>
-        <bt:String id="GroupLabel" DefaultValue="Contoso Add-in"/>
+        <bt:String id="GroupLabel" DefaultValue="IADB Add-in"/>
         <bt:String id="TaskpaneButton.Label" DefaultValue="Show Map"/>
       </bt:ShortStrings>
       <bt:LongStrings>
