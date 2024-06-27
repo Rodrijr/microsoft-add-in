@@ -48,7 +48,7 @@ async function run() {
         var sys_id = data[0].sys_id
         var el = document.createElement("iframe");
         el.src = 'https://iadbdev.service-now.com/x_nuvo_eam_fm_view_v2.do?app=user#?search=' + sys_id;
-        Office.context.ui.displayDialogAsync(el.src, { height: 90, width: 300 });
+        Office.context.ui.displayDialogAsync(el.src, { height: 30, width: 20 });
         el.id = 'miIframe';
         el.referrerpolicy = "strict-origin-when-cross-origin";
         var a = document.getElementById("miIframe")?.remove();
