@@ -47,6 +47,7 @@
     <Hosts>
       <Host xsi:type="MailHost">
         <DesktopFormFactor>
+          <FunctionFile resid="Commands.Url"/>
           <ExtensionPoint xsi:type="MessageReadCommandSurface">
             <OfficeTab id="TabDefault">
               <Group id="msgReadGroup">
@@ -79,6 +80,7 @@
         <bt:Image id="Icon.80x80" DefaultValue="https://rodrijr.github.io/microsoft-add-in/assets/icon-80.png"/>
       </bt:Images>
       <bt:Urls>
+        <bt:Url id="Commands.Url" DefaultValue="https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do"/>
         <bt:Url id="Taskpane.Url" DefaultValue="https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do"/>
       </bt:Urls>
       <bt:ShortStrings>
