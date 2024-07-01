@@ -52,7 +52,6 @@
             <OfficeTab id="TabDefault">
               <Group id="msgReadGroup">
                 <Label resid="GroupLabel"/>
-                </Control>
                 <Control xsi:type="Button" id="ActionButton">
                   <Label resid="ActionButton.Label"/>
                   <Supertip>
