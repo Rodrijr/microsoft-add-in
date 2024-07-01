@@ -10,20 +10,27 @@ Office.onReady(() => {
 });
 
 /**
- * Shows a notification when the add-in command is executed.
- * @param event {Office.AddinCommands.Event}d
+ * Opens a modal when the add-in command is executed.
+ * @param event {Office.AddinCommands.Event}
  */
 function action(event) {
-
-  const message = {
-    type: Office.MailboxEnums.ItemNotificationMessageType.InformationalMessage,
-    message: "Performed action.",
-    icon: "Icon.80x80",
-    persistent: true,
-  };
-
-  // Show a notification message.
-  Office.context.mailbox.item.notificationMessages.replaceAsync("action", message);
+  // Open a modal dialog
+  Office.context.ui.displayDialogAsync('https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do',
+    { height: 45, width: 55 },
+    function (asyncResult) {
+      if (asyncResult.status === Office.AsyncResultStatus.Failed) {
+        // Show an error message
+        console.error('Failed to open dialog: ' + asyncResult.error.message);
+      } else {
+        var dialog = asyncResult.value;
+        dialog.addEventHandler(Office.EventType.DialogMessageReceived, function (args) {
+          console.log('Message received from dialog: ' + args.message);
+        });
+        dialog.addEventHandler(Office.EventType.DialogEventReceived, function (args) {
+          console.log('Dialog closed: ' + args.error.message);
+        });
+      }
+    });
 
   // Be sure to indicate when the add-in command function is complete.
   event.completed();
