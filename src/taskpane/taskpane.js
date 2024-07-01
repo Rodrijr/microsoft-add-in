@@ -23,8 +23,11 @@ Office.onReady((info) => {
   if (info.host === Office.HostType.Outlook) {
 
   }
-  const item = Office.context.mailbox.item;
-  subject = getLocationCode(item.subject);
+  if (Office && Office.context && Office.context.mailbox && Office.context.mailbox.item) {
+    const item = Office.context.mailbox.item;
+    subject = getLocationCode(item.subject);
+
+  }
   console.log('Office.onReady')
   run();
 });
@@ -35,7 +38,7 @@ function getLocationCode(input) {
   }
   return null;
 }
-async function run() {
+async function action() {
   try {
     const locationCode = subject ? subject : 'NE1075';
     console.log('locationCode', locationCode)
@@ -60,5 +63,5 @@ async function run() {
     console.log('error >>>>>>>>>', error);
   }
 }
-run();
+action();
 console.log('AAAAAAAAAAAAAFUERA');
