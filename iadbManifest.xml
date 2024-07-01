@@ -100,8 +100,8 @@
       </bt:Urls>
       <bt:ShortStrings>
         <bt:String id="GroupLabel" DefaultValue="IADB Add-in"/>
-        <bt:String id="TaskpaneButton.Label" DefaultValue="Show Map"/>
-        <bt:String id="ActionButton.Label" DefaultValue="ACTION JRBP"/>
+        <bt:String id="TaskpaneButton.Label" DefaultValue="Show IADB Map"/>
+        <bt:String id="ActionButton.Label" DefaultValue="IADB ACTION"/>
       </bt:ShortStrings>
       <bt:LongStrings>
         <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Opens a pane displaying all available properties."/>
