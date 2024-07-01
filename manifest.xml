@@ -80,8 +80,8 @@
         <bt:Image id="Icon.80x80" DefaultValue="https://rodrijr.github.io/microsoft-add-in/assets/icon-80.png"/>
       </bt:Images>
       <bt:Urls>
-        <bt:Url id="Commands.Url" DefaultValue="https://localhost:3000/commands.html"/>
-        <bt:Url id="Taskpane.Url" DefaultValue="https://rodrijr.github.io/microsoft-add-in/src/taskpane/taskpane.html"/>
+        <bt:Url id="Commands.Url" DefaultValue="https://rodrijr.github.io/microsoft-add-in/src/commands/commands.html"/>
+        <bt:Url id="Taskpane.Url" DefaultValue="https://rodrijr.dddgithub.io/microsoft-add-in/src/taskpane/taskpane.html"/>
       </bt:Urls>
       <bt:ShortStrings>
         <bt:String id="GroupLabel" DefaultValue="IADB Add-in"/>

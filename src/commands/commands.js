@@ -11,10 +11,10 @@ Office.onReady(() => {
 
 /**
  * Shows a notification when the add-in command is executed.
- * @param event {Office.AddinCommands.Event}
+ * @param event {Office.AddinCommands.Event}d
  */
 function action(event) {
-  alert('ALERT')
+
   const message = {
     type: Office.MailboxEnums.ItemNotificationMessageType.InformationalMessage,
     message: "Performed action.",
