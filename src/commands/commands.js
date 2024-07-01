@@ -33,7 +33,7 @@ function action(event) {
     });
 
   // Be sure to indicate when the add-in command function is complete.
-  event.completed();
+  //event.completed();
 }
 
 // Register the function with Office.
