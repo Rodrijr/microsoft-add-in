@@ -6,10 +6,10 @@
            xsi:type="MailApp">
 
   <Id>fa112f69-4608-4f2c-b69d-b7b76bc03388</Id>
-  <Version>1.0.0.6</Version>
+  <Version>1.0.0.7</Version>
   <ProviderName>IADB</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
-  <DisplayName DefaultValue="IADB Location finder"/>
+  <DisplayName DefaultValue="GIT Location finder "/>
   <Description DefaultValue="View ServiceNow data directly from Outlook."/>
   <IconUrl DefaultValue="https://rodrijr.github.io/microsoft-add-in/assets/icon-64.png"/>
   <HighResolutionIconUrl DefaultValue="https://rodrijr.github.io/microsoft-add-in/assets/icon-128.png"/>
