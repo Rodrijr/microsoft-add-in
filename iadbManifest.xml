@@ -6,7 +6,7 @@
            xsi:type="MailApp">
 
   <Id>fa112f69-4608-4f2c-b69d-b7b76bc03388</Id>
-  <Version>1.0.0.6</Version>
+  <Version>2.0.0.0</Version>
   <ProviderName>IADB</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="IADB Location finder"/>
