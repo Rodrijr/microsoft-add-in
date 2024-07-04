@@ -32,8 +32,10 @@ Office.onReady((info) => {
   run();
 });
 function getLocationCode(input) {
+  alert('>>' + input)
   const parts = input.split(' - ');
   if (parts.length >= 2) {
+    alert('>> parts:' + parts[1])
     return parts[1];
   }
   return null;
@@ -51,12 +53,12 @@ async function action() {
         var sys_id = data[0].sys_id
         var el = document.createElement("iframe");
         el.src = 'https://iadbdev.service-now.com/x_nuvo_eam_fm_view_v2.do?app=user#?search=' + sys_id;
-        Office.context.ui.displayDialogAsync(el.src, { height: 70, width: 80 });
+       // Office.context.ui.displayDialogAsync(el.src, { height: 70, width: 80 });
         el.id = 'miIframe';
         el.referrerpolicy = "strict-origin-when-cross-origin";
         var a = document.getElementById("miIframe")?.remove();
         document.getElementById("preview").appendChild(el);
-        const item = Office.context.mailbox.item;
+       // const item = Office.context.mailbox.item;
       }
     }
   } catch (error) {
