@@ -27,7 +27,7 @@ function action(event) {
   // Open a modal dialog
   if (Office && Office.context && Office.context.mailbox && Office.context.mailbox.item) {
     const item = Office.context.mailbox.item;
-    subject = getLocationCode(item.subject);
+    subject = getLocationCode(item.subject) || 'NE1075';
 
   }
   Office.context.ui.displayDialogAsync('https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do?location=' + subject,
