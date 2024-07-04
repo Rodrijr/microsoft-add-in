@@ -30,7 +30,7 @@ Office.onReady((info) => {
 
   }
   console.log('Office.onReady')
-  run();
+  action();
 });
 function getLocationCode(input) {
   console.log('>>' + input)
@@ -46,21 +46,13 @@ async function action() {
     const locationCode = subject ? subject : 'NE1075';
     console.log('locationCode', locationCode)
     if (locationCode) {
-      var response= await instance.get('now/table/x_nuvo_eam_elocation?sysparm_fields=sys_id&sysparm_limit=1&location_code=' + locationCode)
-      console.log('JRBP -> response:', response);
-      var data = response.data?.result;
-      console.log('>>>>> 1 ', data[0]);
-      if (data && data[0]) {
-        var sys_id = data[0].sys_id
-        var el = document.createElement("iframe");
-        el.src = 'https://iadbdev.service-now.com/x_nuvo_eam_fm_view_v2.do?app=user#?search=' + sys_id;
-       // Office.context.ui.displayDialogAsync(el.src, { height: 70, width: 80 });
-        el.id = 'miIframe';
-        el.referrerpolicy = "strict-origin-when-cross-origin";
-        var a = document.getElementById("miIframe")?.remove();
-        document.getElementById("preview").appendChild(el);
-       // const item = Office.context.mailbox.item;
-      }
+      var el = document.createElement("iframe");
+      el.src = 'https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do?location=' + locationCode
+      el.id = 'miIframe';
+      el.referrerpolicy = "strict-origin-when-cross-origin";
+      var a = document.getElementById("miIframe")?.remove();
+      document.getElementById("preview").appendChild(el);
+
     }
   } catch (error) {
     console.log('error >>>>>>>>>', error);
