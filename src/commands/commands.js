@@ -19,18 +19,28 @@ Office.onReady(() => {
   console.log('Office.onReady')
 });
 
+function getLocationCode(input) {
+  console.log('>>' + input)
+  const parts = input.split(' - ');
+  if (parts.length >= 2) {
+    console.log('>> parts:' + parts[1])
+    return parts[1];
+  }
+  return null;
+}
 /**
  * Opens a modal when the add-in command is executed.
  * @param event {Office.AddinCommands.Event}
  */
 function action(event) {
   // Open a modal dialog
+  var subject1 = subject || 'NE1075';
   if (Office && Office.context && Office.context.mailbox && Office.context.mailbox.item) {
     const item = Office.context.mailbox.item;
-    subject = getLocationCode(item.subject) || 'NE1075';
+    subject1 = getLocationCode(item.subject) || subject1;
 
   }
-  Office.context.ui.displayDialogAsync('https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do?location=' + subject,
+  Office.context.ui.displayDialogAsync('https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do?location=' + subject1,
     { height: 45, width: 55 },
     function (asyncResult) {
       if (asyncResult.status === Office.AsyncResultStatus.Failed) {
