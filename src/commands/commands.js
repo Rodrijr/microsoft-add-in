@@ -4,9 +4,19 @@
  */
 
 /* global Office */
-
+var subject = '';
 Office.onReady(() => {
-  // If needed, Office.js is ready to be called.
+  console.log('info.host', info.host)
+  console.log('Office.HostType.Outlook', Office.HostType.Outlook)
+  if (info.host === Office.HostType.Outlook) {
+
+  }
+  if (Office && Office.context && Office.context.mailbox && Office.context.mailbox.item) {
+    const item = Office.context.mailbox.item;
+    subject = getLocationCode(item.subject);
+
+  }
+  console.log('Office.onReady')
 });
 
 /**
@@ -15,7 +25,7 @@ Office.onReady(() => {
  */
 function action(event) {
   // Open a modal dialog
-  Office.context.ui.displayDialogAsync('https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do',
+  Office.context.ui.displayDialogAsync('https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do?location=' + subject,
     { height: 45, width: 55 },
     function (asyncResult) {
       if (asyncResult.status === Office.AsyncResultStatus.Failed) {
