@@ -45,14 +45,14 @@ function action(event) {
     function (asyncResult) {
       if (asyncResult.status === Office.AsyncResultStatus.Failed) {
         // Show an error message
-        alert('Failed to open dialog: ' + asyncResult.error.message);
+        console.log('Failed to open dialog: ' + asyncResult.error.message);
       } else {
         var dialog = asyncResult.value;
         dialog.addEventHandler(Office.EventType.DialogMessageReceived, function (args) {
-          alert('Message received from dialog: ' + args.message);
+          console.log('Message received from dialog: ' + args.message);
         });
         dialog.addEventHandler(Office.EventType.DialogEventReceived, function (args) {
-          alert('Dialog closed: ' + args.error.message);
+          console.log('Dialog closed: ' + args.error.message);
         });
       }
     });
