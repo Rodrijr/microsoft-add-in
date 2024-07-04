@@ -25,6 +25,7 @@ Office.onReady((info) => {
   }
   if (Office && Office.context && Office.context.mailbox && Office.context.mailbox.item) {
     const item = Office.context.mailbox.item;
+    console.log('item.subject' + item.subject)
     subject = getLocationCode(item.subject);
 
   }
@@ -32,10 +33,10 @@ Office.onReady((info) => {
   run();
 });
 function getLocationCode(input) {
-  alert('>>' + input)
+  console.log('>>' + input)
   const parts = input.split(' - ');
   if (parts.length >= 2) {
-    alert('>> parts:' + parts[1])
+    console.log('>> parts:' + parts[1])
     return parts[1];
   }
   return null;
