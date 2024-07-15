@@ -11,8 +11,8 @@
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="GIT Location finder "/>
   <Description DefaultValue="View ServiceNow data directly from Outlook."/>
-  <IconUrl DefaultValue="https://rodrijr.github.io/microsoft-add-in/assets/icon-64.png"/>
-  <HighResolutionIconUrl DefaultValue="https://rodrijr.github.io/microsoft-add-in/assets/icon-128.png"/>
+  <IconUrl DefaultValue="https://rodrijr.github.io/microsoft-add-in/assets/iadbicon-64.png"/>
+  <HighResolutionIconUrl DefaultValue="https://rodrijr.github.io/microsoft-add-in/assets/iadbicon-128.png"/>
   <SupportUrl DefaultValue="https://iadbdev.service-now.com/"/>
   <AppDomains>
     <AppDomain>https://iadbdev.service-now.com</AppDomain>
@@ -90,9 +90,9 @@
     </Hosts>
     <Resources>
       <bt:Images>
-        <bt:Image id="Icon.16x16" DefaultValue="https://rodrijr.github.io/microsoft-add-in/assets/icon-16.png"/>
-        <bt:Image id="Icon.32x32" DefaultValue="https://rodrijr.github.io/microsoft-add-in/assets/icon-32.png"/>
-        <bt:Image id="Icon.80x80" DefaultValue="https://rodrijr.github.io/microsoft-add-in/assets/icon-80.png"/>
+        <bt:Image id="Icon.16x16" DefaultValue="https://rodrijr.github.io/microsoft-add-in/assets/iadbicon-16.png"/>
+        <bt:Image id="Icon.32x32" DefaultValue="https://rodrijr.github.io/microsoft-add-in/assets/iadbicon-32.png"/>
+        <bt:Image id="Icon.80x80" DefaultValue="https://rodrijr.github.io/microsoft-add-in/assets/iadbicon-80.png"/>
       </bt:Images>
       <bt:Urls>
         <bt:Url id="Commands.Url" DefaultValue="https://rodrijr.github.io/microsoft-add-in/src/commands/commands.html"/>
