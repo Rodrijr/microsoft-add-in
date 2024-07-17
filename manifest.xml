@@ -9,7 +9,7 @@
   <Version>1.0.0.8</Version>
   <ProviderName>IADB</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
-  <DisplayName DefaultValue="GIT Location finder "/>
+  <DisplayName DefaultValue="Locations finder"/>
   <Description DefaultValue="View ServiceNow data directly from Outlook."/>
   <IconUrl DefaultValue="https://rodrijr.github.io/microsoft-add-in/assets/iadbicon-64.png"/>
   <HighResolutionIconUrl DefaultValue="https://rodrijr.github.io/microsoft-add-in/assets/iadbicon-128.png"/>
