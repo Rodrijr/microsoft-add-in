@@ -3,7 +3,6 @@
  * See LICENSE in the project root for license information.
  */
 /* global document, Office */
-console.log('AAAAAAAAAAAAAFUERA 1');
 
 const instance = axios.create({
   baseURL: 'https://iadbdev.service-now.com/api/',
@@ -15,7 +14,6 @@ const instance = axios.create({
   }
 });
 
-console.log('AAAAAAAAAAAAAFUERA 2');
 var subject;
 Office.onReady((info) => {
   console.log('info.host', info.host)
@@ -29,14 +27,11 @@ Office.onReady((info) => {
     subject = getLocationCode(item.subject);
 
   }
-  console.log('Office.onReady')
   action();
 });
 function getLocationCode(input) {
-  console.log('>>' + input)
   const parts = input.split(' - ');
   if (parts.length >= 2) {
-    console.log('>> parts:' + parts[1])
     return parts[1];
   }
   return null;
@@ -50,13 +45,12 @@ async function action() {
       el.src = 'https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do?location=' + locationCode
       el.id = 'miIframe';
       el.referrerpolicy = "strict-origin-when-cross-origin";
-      var a = document.getElementById("miIframe")?.remove();
+      document.getElementById("miIframe")?.remove();
       document.getElementById("preview").appendChild(el);
 
     }
   } catch (error) {
-    console.log('error >>>>>>>>>', error);
+    console.log('error', error);
   }
 }
 action();
-console.log('AAAAAAAAAAAAAFUERA');
