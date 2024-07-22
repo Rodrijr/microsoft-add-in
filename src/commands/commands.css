@@ -11,7 +11,7 @@ body {
   padding: 0;
 }
 .header-bar,
-sn-polaris-header {
+#sn-polaris-header {
   display: none !important;
 }
 #gsft_nav {
