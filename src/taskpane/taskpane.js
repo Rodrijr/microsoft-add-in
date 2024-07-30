@@ -2,6 +2,7 @@
 
 Office.onReady((info) => {
   if (info.host === Office.HostType.Outlook) {
+    console.log('DEBIO LLEGAR')
     Office.context.mailbox.item.addHandlerAsync(Office.EventType.ItemChanged, loadResourceInformation);
     loadResourceInformation();
   }
