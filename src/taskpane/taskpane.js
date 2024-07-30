@@ -4,7 +4,6 @@
  */
 /* global document, Office */
 
-
 var subject;
 Office.onReady((info) => {
   console.log('info.host', info.host)
@@ -15,12 +14,13 @@ Office.onReady((info) => {
   if (Office && Office.context && Office.context.mailbox && Office.context.mailbox.item) {
     const item = Office.context.mailbox.item;
     console.log('item.subject: ' + JSON.stringify(item))
-    console.log('item.subject: ' ,(item))
+    console.log('item.subject: ', (Office))
     subject = getLocationCode(item.subject);
 
   }
   action();
 });
+
 function getLocationCode(input) {
   const parts = input.split(' - ');
   if (parts.length >= 2) {
@@ -28,6 +28,7 @@ function getLocationCode(input) {
   }
   return null;
 }
+
 async function action() {
   try {
     const locationCode = subject ? subject : 'NE1075';
