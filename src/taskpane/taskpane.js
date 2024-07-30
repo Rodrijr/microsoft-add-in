@@ -1,49 +1,40 @@
-/*
- * Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
- * See LICENSE in the project root for license information.
- */
 /* global document, Office */
 
-var subject;
 Office.onReady((info) => {
-  console.log('info.host', info.host)
-  console.log('Office.HostType.Outlook', Office.HostType.Outlook)
   if (info.host === Office.HostType.Outlook) {
-
+    Office.context.mailbox.item.addHandlerAsync(Office.EventType.ItemChanged, loadResourceInformation);
+    loadResourceInformation();
   }
-  if (Office && Office.context && Office.context.mailbox && Office.context.mailbox.item) {
-    const item = Office.context.mailbox.item;
-    console.log('item.subject: ' + JSON.stringify(item))
-    console.log('Office: ', (Office))
-    subject = getLocationCode(item.subject);
-
-  }
-  action();
 });
 
-function getLocationCode(input) {
-  const parts = input.split(' - ');
-  if (parts.length >= 2) {
-    return parts[1];
-  }
-  return null;
+function getCustomFieldFromLocation(location) {
+  // Replace with logic to extract custom field from the location string
+  // Assuming the custom field is within square brackets in the location string, e.g., "Room A [customField]"
+  const match = location.match(/\[(.*?)\]/);
+  return match ? match[1] : null;
 }
 
-async function action() {
-  try {
-    const locationCode = subject ? subject : 'NE1075';
-    console.log('locationCode 2', locationCode)
-    if (locationCode) {
-      var el = document.createElement("iframe");
-      el.src = 'https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do?location=' + locationCode
-      el.id = 'miIframe';
-      el.referrerpolicy = "strict-origin-when-cross-origin";
-      document.getElementById("miIframe")?.remove();
-      document.getElementById("preview").appendChild(el);
+function loadResourceInformation() {
+  const item = Office.context.mailbox.item;
+  let location = item.location;
 
+  if (location) {
+    const customField = getCustomFieldFromLocation(location);
+    if (customField) {
+      updateIframe(customField);
     }
-  } catch (error) {
-    console.log('error', error);
   }
 }
-action();
+
+async function updateIframe(customField) {
+  try {
+    var el = document.createElement("iframe");
+    el.src = 'https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do?location=' + customField;
+    el.id = 'miIframe';
+    el.referrerpolicy = "strict-origin-when-cross-origin";
+    document.getElementById("miIframe")?.remove();
+    document.getElementById("preview").appendChild(el);
+  } catch (error) {
+    console.error('Error loading iframe:', error);
+  }
+}
