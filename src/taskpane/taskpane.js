@@ -14,7 +14,7 @@ Office.onReady((info) => {
   if (Office && Office.context && Office.context.mailbox && Office.context.mailbox.item) {
     const item = Office.context.mailbox.item;
     console.log('item.subject: ' + JSON.stringify(item))
-    console.log('item.subject: ', (Office))
+    console.log('Office: ', (Office))
     subject = getLocationCode(item.subject);
 
   }
