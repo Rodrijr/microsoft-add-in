@@ -4,15 +4,6 @@
  */
 /* global document, Office */
 
-const instance = axios.create({
-  baseURL: 'https://iadbdev.service-now.com/api/',
-  timeout: 1000,
-  headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json',
-    'Authorization': 'Basic ' + btoa('autocad_integration' + ':' + 'AutoCadIntegration67=')
-  }
-});
 
 var subject;
 Office.onReady((info) => {
@@ -40,7 +31,7 @@ function getLocationCode(input) {
 async function action() {
   try {
     const locationCode = subject ? subject : 'NE1075';
-    console.log('locationCode', locationCode)
+    console.log('locationCode 2', locationCode)
     if (locationCode) {
       var el = document.createElement("iframe");
       el.src = 'https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do?location=' + locationCode
