@@ -8,7 +8,8 @@ Office.onReady((info) => {
   }
 });
 
-function getCustomFieldFromLocation(location) {
+function getCustomFieldFromLocatiotypen(location) {
+  console.log(location)
   // Replace with logic to extract custom field from the location string
   // Assuming the custom field is within square brackets in the location string, e.g., "Room A [customField]"
   const match = location.match(/\[(.*?)\]/);
