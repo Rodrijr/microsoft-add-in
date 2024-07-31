@@ -19,7 +19,7 @@ function loadResourceInformation() {
   const item = Office.context.mailbox.item;
   let location = item.location;
   console.log('>>>>>>>>>>>>>>>', location)
-  console.log('>>>>>>>>>>>>>>> Office.context.mailbox: ', Office.context.mailbox)
+  console.log('>>>>>>>>>>>>>>> Office.context.mailbox: ', Office.context.mailbox.item.organizer)
 
   if (location) {
     const customField = getCustomFieldFromLocation(location);
