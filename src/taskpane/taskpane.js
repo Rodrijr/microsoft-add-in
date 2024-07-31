@@ -14,7 +14,10 @@ function getCustomFieldFromLocation(location) {
   const match = location.match(/\[(.*?)\]/);
   return match ? match[1] : null;
 }
+function cb(p1,p2,p3) {
+console.log('JRBP -> p1,p2,p3:', p1,p2,p3);
 
+}
 function loadResourceInformation() {
   const item = Office.context.mailbox.item;
   let location = item.location;
@@ -26,7 +29,7 @@ function loadResourceInformation() {
   console.log('>>>>>>>>>>>>>>> Office.context.mailbox: ', Office.context.mailbox.item.organizer)
 
   if (location) {
-    const customField = getCustomFieldFromLocation(location.getAsync());
+    const customField = getCustomFieldFromLocation(location.getAsync(cb));
     if (customField) {
       updateIframe(customField);
     }
