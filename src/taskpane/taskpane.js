@@ -26,7 +26,7 @@ function loadResourceInformation() {
   console.log('>>>>>>>>>>>>>>> Office.context.mailbox: ', Office.context.mailbox.item.organizer)
 
   if (location) {
-    const customField = getCustomFieldFromLocation(location);
+    const customField = getCustomFieldFromLocation(location.getAsync());
     if (customField) {
       updateIframe(customField);
     }
