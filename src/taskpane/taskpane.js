@@ -11,8 +11,9 @@ Office.onReady((info) => {
 function getCustomFieldFromLocation(location) {
   console.log(typeof location)
   // if(typeof location)
-  const match = location.match(/\[(.*?)\]/);
-  return match ? match[1] : null;
+ // const match = location.match(/\[(.*?)\]/);
+  //return match ? match[1] : null;
+  location
 }
 function cb(p1,p2,p3) {
 console.log('JRBP -> p1,p2,p3:', p1,p2,p3);
