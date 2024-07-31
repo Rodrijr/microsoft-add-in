@@ -18,25 +18,33 @@ function getCustomFieldFromLocation(location) {
 function loadResourceInformation() {
   const item = Office.context.mailbox.item;
   let location = item.location;
-  console.log('>>>>>>>>>>>>>>>', location)
+  console.log('>>>>>>>>>>>>>>> location ', location)
+  console.log('>>>>>>>>>>>>>>> enhancedLocation ', item.enhancedLocation)
+  console.log('>>>>>>>>>>>>>>> subject ', item.subject)
+  console.log('>>>>>>>>>>>>>>> to ', item.to)
+
   console.log('>>>>>>>>>>>>>>> Office.context.mailbox: ', Office.context.mailbox.item.organizer)
 
-  if (location) {
+  /*if (location) {
     const customField = getCustomFieldFromLocation(location);
     if (customField) {
       updateIframe(customField);
     }
-  }
+  }*/
 }
 
 async function updateIframe(customField) {
   try {
-    var el = document.createElement("iframe");
-    el.src = 'https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do?location=' + customField;
-    el.id = 'miIframe';
-    el.referrerpolicy = "strict-origin-when-cross-origin";
-    document.getElementById("miIframe")?.remove();
-    document.getElementById("preview").appendChild(el);
+    if (customField) {
+      var el = document.createElement("iframe");
+      el.src = 'https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do?location=' + customField;
+      el.id = 'miIframe';
+      el.referrerpolicy = "strict-origin-when-cross-origin";
+      document.getElementById("miIframe")?.remove();
+      document.getElementById("preview").appendChild(el);
+    } else {
+
+    }
   } catch (error) {
     console.error('Error loading iframe:', error);
   }
