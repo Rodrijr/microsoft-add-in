@@ -173,13 +173,13 @@
         <bt:Url id="Taskpane.Url" DefaultValue="https://rodrijr.github.io/microsoft-add-in/src/taskpane/taskpane.html"/>
       </bt:Urls>
       <bt:ShortStrings>
-        <bt:String id="GroupLabel" DefaultValue="IADB Add-in"/>
-        <bt:String id="TaskpaneButton.Label" DefaultValue="Show IADB Map"/>
-        <bt:String id="ActionButton.Label" DefaultValue="IADB ACTION"/>
+        <bt:String id="GroupLabel" DefaultValue="ServiceNow Group"/>
+        <bt:String id="TaskpaneButton.Label" DefaultValue="Open ServiceNow"/>
+        <bt:String id="ActionButton.Label" DefaultValue="Execute Action"/>
       </bt:ShortStrings>
       <bt:LongStrings>
-        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Opens a pane displaying all available properties."/>
-        <bt:String id="ActionButton.Tooltip" DefaultValue="Perform an action when clicked."/>
+        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Open ServiceNow Taskpane"/>
+        <bt:String id="ActionButton.Tooltip" DefaultValue="Execute ServiceNow Action"/>
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>
