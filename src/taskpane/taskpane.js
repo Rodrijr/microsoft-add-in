@@ -1,12 +1,12 @@
 Office.onReady((info) => {
-  getUserData()
   if (info.host === Office.HostType.Outlook) {
     if (Office && Office.context && Office.context.mailbox && Office.context.mailbox.item) {
+      getUserData()
       const item = Office.context.mailbox.item;
       subject = getLocationCode(item.subject);
+      checkServiceNowSession();
     }
   }
-  checkServiceNowSession();
 });
 
 
