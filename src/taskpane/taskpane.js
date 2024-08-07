@@ -20,11 +20,16 @@ async function checkServiceNowSession() {
   try {
     // Verificamos si la sesión de ServiceNow ya está abierta
     const response = await axios.get('https://iadbdev.service-now.com/api/now/v2/table/sys_user?sysparm_limit=1');
+    console.log('>>>>>>>>>>>>>>> verificando')
     if (response.status === 200) {
+      console.log('>>>>>>>>>>>>>>> SESION OK ')
+
       // Si la sesión está activa, procedemos con la acción
       action();
     } else {
       // Si no, redirigimos al usuario para autenticarse
+      console.log('>>>>>>>>>>>>>>> SESION FALSE ')
+
       window.location.href = 'https://iadbdev.service-now.com';
     }
   } catch (error) {
