@@ -1,4 +1,5 @@
 Office.onReady((info) => {
+  getUserData()
   if (info.host === Office.HostType.Outlook) {
     if (Office && Office.context && Office.context.mailbox && Office.context.mailbox.item) {
       const item = Office.context.mailbox.item;
@@ -8,6 +9,24 @@ Office.onReady((info) => {
   checkServiceNowSession();
 });
 
+
+async function getUserData() {
+  try {
+    let userTokenEncoded = await OfficeRuntime.auth.getAccessToken();
+    let userToken = jwt_decode(userTokenEncoded); // Using the https://www.npmjs.com/package/jwt-decode library.
+    console.log(">>>>>>>>>>>>>>>>>>> ", userToken.name); // user name
+    console.log(">>>>>>>>>>>>>>>>>>> ", userToken.preferred_username); // email
+    console.log(">>>>>>>>>>>>>>>>>>> ", userToken.oid); // user id
+  }
+  catch (exception) {
+    if (exception.code === 13003) {
+      // SSO is not supported for domain user accounts, only
+      // Microsoft 365 Education or work account, or a Microsoft account.
+    } else {
+      // Handle error
+    }
+  }
+}
 function getLocationCode(input) {
   const parts = input.split(' - ');
   if (parts.length >= 2) {
