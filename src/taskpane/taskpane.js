@@ -1,53 +1,56 @@
+/*
+ * Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
+ * See LICENSE in the project root for license information.
+ */
 /* global document, Office */
 
-Office.onReady((info) => {
-  if (info.host === Office.HostType.Outlook) {
-    console.log('DEBIO LLEGAR 2')
-    loadResourceInformation();
-    // Office.context.mailbox.item.addHandlerAsync(Office.EventType.ItemChanged, loadResourceInformation);
+const instance = axios.create({
+  baseURL: 'https://iadbdev.service-now.com/api/',
+  timeout: 1000,
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'Authorization': 'Basic ' + btoa('autocad_integration' + ':' + 'AutoCadIntegration67=')
   }
 });
 
-function getCustomFieldFromLocation(location) {
-  console.log(typeof location)
-  // if(typeof location)
- // const match = location.match(/\[(.*?)\]/);
-  //return match ? match[1] : null;
-  location
-}
-function cb(p1,p2,p3) {
-console.log('JRBP -> p1,p2,p3:', p1,p2,p3);
+var subject;
+Office.onReady((info) => {
+  console.log('info.host', info.host)
+  console.log('Office.HostType.Outlook', Office.HostType.Outlook)
+  if (info.host === Office.HostType.Outlook) {
 
-}
-function loadResourceInformation() {
-  const item = Office.context.mailbox.item;
-  let location = item.location;
-  console.log('>>>>>>>>>>>>>>> location ', location)
-  console.log('>>>>>>>>>>>>>>> enhancedLocation ', item.enhancedLocation)
-  console.log('>>>>>>>>>>>>>>> subject ', item.subject)
-  console.log('>>>>>>>>>>>>>>> to ', item.to)
-
-  console.log('>>>>>>>>>>>>>>> Office.context.mailbox: ', Office.context.mailbox.item.organizer)
-
-  if (location) {
-    const customField = getCustomFieldFromLocation(location.getAsync(cb));
-    if (customField) {
-      updateIframe(customField);
-    }
   }
+  if (Office && Office.context && Office.context.mailbox && Office.context.mailbox.item) {
+    const item = Office.context.mailbox.item;
+    console.log('item.subject' + JSON.stringify(item.subject))
+    subject = getLocationCode(item.subject);
+
+  }
+  action();
+});
+function getLocationCode(input) {
+  const parts = input.split(' - ');
+  if (parts.length >= 2) {
+    return parts[1];
+  }
+  return null;
 }
-
-async function updateIframe(customField) {
+async function action() {
   try {
-
+    const locationCode = subject ? subject : 'NE1075';
+    console.log('locationCode', locationCode)
+    if (locationCode) {
       var el = document.createElement("iframe");
-      el.src = 'https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do?location=' + 'NE1081';
+      el.src = 'https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do?location=' + locationCode
       el.id = 'miIframe';
       el.referrerpolicy = "strict-origin-when-cross-origin";
       document.getElementById("miIframe")?.remove();
       document.getElementById("preview").appendChild(el);
 
+    }
   } catch (error) {
-    console.error('Error loading iframe:', error);
+    console.log('error', error);
   }
 }
+action();
