@@ -14,8 +14,6 @@ Office.onReady((info) => {
       }
       getUserData()
 
-
-
       const item = Office.context.mailbox.item;
       subject = getLocationCode(item.subject);
       checkServiceNowSession();
