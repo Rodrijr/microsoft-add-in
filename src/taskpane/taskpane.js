@@ -20,22 +20,22 @@ async function checkServiceNowSession() {
   try {
     // Verificamos si la sesión de ServiceNow ya está abierta
     const response = await axios.get('https://iadbdev.service-now.com/api/now/v2/table/sys_user?sysparm_limit=1');
-    console.log('>>>>>>>>>>>>>>> verificando')
     if (response.status === 200) {
-      console.log('>>>>>>>>>>>>>>> SESION OK ')
-
       // Si la sesión está activa, procedemos con la acción
       action();
     } else {
-      // Si no, redirigimos al usuario para autenticarse
-      console.log('>>>>>>>>>>>>>>> SESION FALSE ')
-
-      window.location.href = 'https://iadbdev.service-now.com';
+      // Si no, cargamos la página de autenticación dentro del iframe
+      loadAuthPage();
     }
   } catch (error) {
-    console.log('No active ServiceNow session found, redirecting to SSO login.');
-    window.location.href = 'https://iadbdev.service-now.com';
+    console.log('No active ServiceNow session found, loading auth page.');
+    loadAuthPage();
   }
+}
+
+function loadAuthPage() {
+  const iframe = document.getElementById("miIframe");
+  iframe.src = 'https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in_auth.do';
 }
 
 async function action() {
