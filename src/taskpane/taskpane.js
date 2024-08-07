@@ -36,6 +36,10 @@ async function checkServiceNowSession() {
 function loadAuthPage() {
   const iframe = document.getElementById("miIframe");
   iframe.src = 'https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in_auth.do';
+  iframe.id = 'miIframe';
+  iframe.referrerpolicy = "strict-origin-when-cross-origin";
+  document.getElementById("miIframe")?.remove();
+  document.getElementById("preview").appendChild(iframe);
 }
 
 async function action() {
