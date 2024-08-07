@@ -2,6 +2,20 @@ Office.onReady((info) => {
   if (info.host === Office.HostType.Outlook) {
     if (Office && Office.context && Office.context.mailbox && Office.context.mailbox.item) {
       getUserData()
+
+      try {
+        const accessToken = await Office.auth.getAccessToken({
+          allowSignInPrompt: true,
+          allowConsentPrompt: true,
+          forMSGraphAccess: true,
+        });
+        console.log('JRBP -> accessToken:', accessToken);
+
+      } catch (error) {
+        console.log("Error obtaining token", error);
+      }
+
+
       const item = Office.context.mailbox.item;
       subject = getLocationCode(item.subject);
       checkServiceNowSession();
