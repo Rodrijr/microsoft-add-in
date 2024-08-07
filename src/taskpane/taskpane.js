@@ -1,10 +1,8 @@
 Office.onReady((info) => {
   if (info.host === Office.HostType.Outlook) {
     if (Office && Office.context && Office.context.mailbox && Office.context.mailbox.item) {
-      getUserData()
-
       try {
-        const accessToken = await Office.auth.getAccessToken({
+        const accessToken = Office.auth.getAccessToken({
           allowSignInPrompt: true,
           allowConsentPrompt: true,
           forMSGraphAccess: true,
@@ -14,6 +12,8 @@ Office.onReady((info) => {
       } catch (error) {
         console.log("Error obtaining token", error);
       }
+      getUserData()
+
 
 
       const item = Office.context.mailbox.item;
@@ -33,6 +33,7 @@ async function getUserData() {
     console.log(">>>>>>>>>>>>>>>>>>> ", userToken.oid); // user id
   }
   catch (exception) {
+    console.log('JRBP -> exception:', exception);
     if (exception.code === 13003) {
       // SSO is not supported for domain user accounts, only
       // Microsoft 365 Education or work account, or a Microsoft account.
