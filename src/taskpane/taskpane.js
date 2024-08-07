@@ -86,5 +86,6 @@ async function checkAuthentication() {
     }
   } catch (error) {
     console.error('Authentication check failed', error);
+    console.trace(error);
   }
 }
