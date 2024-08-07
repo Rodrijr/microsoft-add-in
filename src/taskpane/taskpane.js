@@ -1,91 +1,62 @@
+/* global Office */
+const locationEndpoint = 'https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do?location=';
+
 Office.onReady((info) => {
   if (info.host === Office.HostType.Outlook) {
-    if (Office && Office.context && Office.context.mailbox && Office.context.mailbox.item) {
-      try {
-        const accessToken = Office.auth.getAccessToken({
-          allowSignInPrompt: true,
-          allowConsentPrompt: true,
-          forMSGraphAccess: true,
-        });
-        console.log('JRBP -> accessToken:', accessToken);
-
-      } catch (error) {
-        console.log("Error obtaining token", error);
-      }
-      getUserData()
-
-      const item = Office.context.mailbox.item;
-      subject = getLocationCode(item.subject);
-      checkServiceNowSession();
-    }
+    initialize();
   }
 });
 
+async function initialize() {
+  if (Office.context.mailbox && Office.context.mailbox.item) {
+    const item = Office.context.mailbox.item;
+    const subject = getLocationCode(item.subject);
 
-async function getUserData() {
-  try {
-    let userTokenEncoded = await OfficeRuntime.auth.getAccessToken();
-    let userToken = jwt_decode(userTokenEncoded); // Using the https://www.npmjs.com/package/jwt-decode library.
-    console.log(">>>>>>>>>>>>>>>>>>> ", userToken.name); // user name
-    console.log(">>>>>>>>>>>>>>>>>>> ", userToken.preferred_username); // email
-    console.log(">>>>>>>>>>>>>>>>>>> ", userToken.oid); // user id
-  }
-  catch (exception) {
-    console.log('JRBP -> exception:', exception);
-    if (exception.code === 13003) {
-      // SSO is not supported for domain user accounts, only
-      // Microsoft 365 Education or work account, or a Microsoft account.
-    } else {
-      // Handle error
+    if (subject) {
+      const locationCode = subject || 'NE1075';
+      const iframeUrl = `${locationEndpoint}${locationCode}`;
+
+      // Create an iframe and append it to the DOM
+      const iframe = document.createElement('iframe');
+      iframe.src = iframeUrl;
+      iframe.id = 'miIframe';
+      iframe.style.height = '100vh';
+      iframe.style.width = '100vw';
+      iframe.referrerpolicy = "strict-origin-when-cross-origin";
+
+      // Append iframe to the preview element
+      const previewElement = document.getElementById('preview');
+      previewElement.innerHTML = ''; // Clear any existing content
+      previewElement.appendChild(iframe);
+
+      // Check authentication without changing the session
+      await checkAuthentication();
     }
   }
 }
+
 function getLocationCode(input) {
   const parts = input.split(' - ');
-  if (parts.length >= 2) {
-    return parts[1];
-  }
-  return null;
+  return parts.length >= 2 ? parts[1] : null;
 }
 
-async function checkServiceNowSession() {
+async function checkAuthentication() {
   try {
-    // Verificamos si la sesión de ServiceNow ya está abierta
-    const response = await axios.get('https://iadbdev.service-now.com/api/now/v2/table/sys_user?sysparm_limit=1');
-    if (response.status === 200) {
-      // Si la sesión está activa, procedemos con la acción
-      action();
-    } else {
-      // Si no, cargamos la página de autenticación dentro del iframe
-      loadAuthPage();
+    // Attempt to load an authenticated page from ServiceNow
+    const response = await fetch('https://iadbdev.service-now.com/api/now/table/sys_user', {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include'
+    });
+
+    if (response.status === 401) {
+      // Not authenticated, prompt for login
+      window.open('https://login.microsoftonline.com/', '_blank', 'width=500,height=600');
     }
   } catch (error) {
-    console.log('No active ServiceNow session found, loading auth page.');
-    loadAuthPage();
-  }
-}
-
-function loadAuthPage() {
-  const iframe = document.getElementById("miIframe");
-  iframe.src = 'https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in_auth.do';
-  iframe.id = 'miIframe';
-  iframe.referrerpolicy = "strict-origin-when-cross-origin";
-  document.getElementById("miIframe")?.remove();
-  document.getElementById("preview").appendChild(iframe);
-}
-
-async function action() {
-  try {
-    const locationCode = subject ? subject : 'NE1075';
-    if (locationCode) {
-      const iframe = document.createElement("iframe");
-      iframe.src = 'https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do?location=' + locationCode;
-      iframe.id = 'miIframe';
-      iframe.referrerpolicy = "strict-origin-when-cross-origin";
-      document.getElementById("miIframe")?.remove();
-      document.getElementById("preview").appendChild(iframe);
-    }
-  } catch (error) {
-    console.log('Error in action:', error);
+    console.error('Authentication check failed', error);
   }
 }
