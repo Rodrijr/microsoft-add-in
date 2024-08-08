@@ -70,7 +70,7 @@ async function establishServiceNowSession(token) {
   try {
 
 
-    instance.defaults.headers.common['Authorization'] = `Bearer YOUR_ACCESS_TOKEN`;
+    instance.defaults.headers.Authorization = `Bearer ${token}`;
     var response = await instance.get('now/table/x_nuvo_eam_elocation?sysparm_fields=sys_id&sysparm_limit=1&location_code=' + 'NE1075')
     console.log('JRBP -> response:', response);
     var data = response.data?.result;
