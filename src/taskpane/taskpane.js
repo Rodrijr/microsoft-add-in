@@ -6,7 +6,15 @@ Office.onReady((info) => {
     initialize();
   }
 });
-
+const instance = axios.create({
+  baseURL: 'https://iadbdev.service-now.com/api/',
+  timeout: 1000,
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'Authorization': 'Basic '
+  }
+});
 async function initialize() {
   if (Office.context.mailbox && Office.context.mailbox.item) {
     const item = Office.context.mailbox.item;
