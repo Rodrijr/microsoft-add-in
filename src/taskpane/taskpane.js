@@ -14,6 +14,13 @@ async function initialize() {
 
     if (subject) {
       const locationCode = subject || 'NE1075';
+
+      // Get user identity token
+      const token = await getUserIdentityToken();
+
+      // Send the token to ServiceNow to establish the session
+      await establishServiceNowSession(token);
+
       const iframeUrl = `${locationEndpoint}${locationCode}`;
 
       // Create an iframe and append it to the DOM
@@ -27,9 +34,6 @@ async function initialize() {
       const previewElement = document.getElementById('preview');
       previewElement.innerHTML = '';
       previewElement.appendChild(iframe);
-
-      // Get user identity token
-      await getUserIdentityToken();
     }
   }
 }
@@ -45,7 +49,6 @@ function getUserIdentityToken() {
       if (result.status === Office.AsyncResultStatus.Succeeded) {
         const token = result.value;
         console.log('User Identity Token:', token);
-        // Here you can use the token to authenticate against your ServiceNow instance or any other service
         resolve(token);
       } else {
         console.error('Failed to get user identity token:', result.error);
@@ -53,4 +56,26 @@ function getUserIdentityToken() {
       }
     });
   });
+}
+
+async function establishServiceNowSession(token) {
+  try {
+    const response = await fetch('https://iadbdev.service-now.com/api/x_nuvo_eam_authentication/session', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`  // Send the token in the header
+      },
+      body: JSON.stringify({ token: token })
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to establish session with ServiceNow');
+    }
+
+    const data = await response.json();
+    console.log('Session established with ServiceNow:', data);
+  } catch (error) {
+    console.error('Error establishing session with ServiceNow:', error);
+  }
 }
