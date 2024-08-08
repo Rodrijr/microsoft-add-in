@@ -70,7 +70,7 @@ async function establishServiceNowSession(token) {
   try {
 
 
-    const locationCode = subject ? subject : 'NE1075';
+    const locationCode = 'NE1075';
     console.log('locationCode', locationCode)
     if (locationCode) {
       var response = await instance.get('now/table/x_nuvo_eam_elocation?sysparm_fields=sys_id&sysparm_limit=1&location_code=' + locationCode)
