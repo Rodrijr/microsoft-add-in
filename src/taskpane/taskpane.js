@@ -60,6 +60,14 @@ function getUserIdentityToken() {
 
 async function establishServiceNowSession(token) {
   try {
+
+
+    instance.defaults.headers.common['Authorization'] = `Bearer YOUR_ACCESS_TOKEN`;
+    var response = await instance.get('now/table/x_nuvo_eam_elocation?sysparm_fields=sys_id&sysparm_limit=1&location_code=' + locationCode)
+    console.log('JRBP -> response:', response);
+    var data = response.data?.result;
+    console.log('JRBP -> data:', data);
+/*
     const response = await fetch('https://iadbdev.service-now.com/api/x_nuvo_eam_authentication/session', {
       method: 'POST',
       headers: {
@@ -74,7 +82,7 @@ async function establishServiceNowSession(token) {
     }
 
     const data = await response.json();
-    console.log('Session established with ServiceNow:', data);
+    console.log('Session established with ServiceNow:', data);*/
   } catch (error) {
     console.error('Error establishing session with ServiceNow:', error);
   }
