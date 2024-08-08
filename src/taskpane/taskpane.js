@@ -8,7 +8,7 @@ Office.onReady((info) => {
 });
 const instance = axios.create({
   baseURL: 'https://iadbdev.service-now.com/api/',
-  timeout: 1000,
+  timeout: 5000,
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
