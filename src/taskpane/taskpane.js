@@ -101,8 +101,8 @@ async function establishServiceNowSession(token) {
         }
       }
 
-      const data = await response1.json();
-      console.log('Session established with ServiceNow:', data);
+      const data2 = await response1.json();
+      console.log('Session established with ServiceNow:', data2);
 
     } catch (e) {
 
