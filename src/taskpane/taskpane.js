@@ -6,15 +6,7 @@ Office.onReady((info) => {
     initialize();
   }
 });
-const instance = axios.create({
-  baseURL: 'https://iadbdev.service-now.com/api/',
-  timeout: 5000,
-  headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json',
-    'Authorization': 'Basic ' + btoa('autocad_integration' + ':' + 'AutoCadIntegration67=')
-  }
-});
+
 async function initialize() {
   if (Office.context.mailbox && Office.context.mailbox.item) {
     const item = Office.context.mailbox.item;
@@ -26,22 +18,15 @@ async function initialize() {
       // Get user identity token
       const token = await getUserIdentityToken();
 
-      // Send the token to ServiceNow to establish the session
-      await establishServiceNowSession(token);
+      // Authenticate the user in ServiceNow
+      const authenticated = await authenticateUserInServiceNow(token);
 
-      const iframeUrl = `${locationEndpoint}${locationCode}`;
-
-      // Create an iframe and append it to the DOM
-      const iframe = document.createElement('iframe');
-      iframe.src = iframeUrl;
-      iframe.id = 'miIframe';
-      iframe.style.height = '100vh';
-      iframe.style.width = '100vw';
-      iframe.referrerpolicy = "strict-origin-when-cross-origin";
-
-      const previewElement = document.getElementById('preview');
-      previewElement.innerHTML = '';
-      previewElement.appendChild(iframe);
+      if (authenticated) {
+        // Once authenticated, load the iframe with the restricted page
+        loadIframe(locationCode);
+      } else {
+        console.error('User authentication failed.');
+      }
     }
   }
 }
@@ -66,28 +51,35 @@ function getUserIdentityToken() {
   });
 }
 
-async function establishServiceNowSession(token) {
+async function authenticateUserInServiceNow(token) {
   try {
-    const locationCode = 'NE1075';
-    console.log('locationCode', locationCode)
-    if (locationCode) {
-      var response = await instance.get('now/table/x_nuvo_eam_elocation?sysparm_fields=sys_id&sysparm_limit=1&location_code=' + locationCode)
-      console.log('JRBP -> response:', response);
-      var data = response.data?.result;
-      console.log('>>>>> 1 ', data[0]);
-      if (data && data[0]) {
+    const response = await axios.post('https://iadbdev.service-now.com/api/now/v1/session', { token });
 
-        var sys_id = data[0].sys_id
-        var el = document.createElement("iframe");
-        el.src = locationEndpoint + 'NE1075';
-        el.id = 'miIframe';
-        el.referrerpolicy = "strict-origin-when-cross-origin";
-        var a = document.getElementById("miIframe")?.remove();
-        document.getElementById("preview").appendChild(el);
-        const item = Office.context.mailbox.item;
-      }
+    if (response.status === 200) {
+      console.log('User authenticated in ServiceNow.');
+      return true;
+    } else {
+      console.error('Authentication in ServiceNow failed:', response.statusText);
+      return false;
     }
   } catch (error) {
-    console.error('Error establishing session with ServiceNow:', error);
+    console.error('Error during authentication in ServiceNow:', error);
+    return false;
   }
+}
+
+function loadIframe(locationCode) {
+  const iframeUrl = `${locationEndpoint}${locationCode}`;
+
+  // Create an iframe and append it to the DOM
+  const iframe = document.createElement('iframe');
+  iframe.src = iframeUrl;
+  iframe.id = 'miIframe';
+  iframe.style.height = '100vh';
+  iframe.style.width = '100vw';
+  iframe.referrerpolicy = "strict-origin-when-cross-origin";
+
+  const previewElement = document.getElementById('preview');
+  previewElement.innerHTML = '';
+  previewElement.appendChild(iframe);
 }
