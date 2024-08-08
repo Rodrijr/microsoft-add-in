@@ -7,6 +7,16 @@ Office.onReady((info) => {
   }
 });
 
+const instance = axios.create({
+  baseURL: 'https://iadbdev.service-now.com/api/',
+  timeout: 5000,
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'Authorization': 'Basic ' + btoa('autocad_integration' + ':' + 'AutoCadIntegration67=')
+  }
+});
+
 async function initialize() {
   if (Office.context.mailbox && Office.context.mailbox.item) {
     const item = Office.context.mailbox.item;
@@ -18,15 +28,22 @@ async function initialize() {
       // Get user identity token
       const token = await getUserIdentityToken();
 
-      // Authenticate the user in ServiceNow
-      const authenticated = await authenticateUserInServiceNow(token);
+      // Send the token to ServiceNow to establish the session
+      await establishServiceNowSession(token);
 
-      if (authenticated) {
-        // Once authenticated, load the iframe with the restricted page
-        loadIframe(locationCode);
-      } else {
-        console.error('User authentication failed.');
-      }
+      const iframeUrl = `${locationEndpoint}${locationCode}`;
+
+      // Create an iframe and append it to the DOM
+      const iframe = document.createElement('iframe');
+      iframe.src = iframeUrl;
+      iframe.id = 'miIframe';
+      iframe.style.height = '100vh';
+      iframe.style.width = '100vw';
+      iframe.referrerpolicy = "strict-origin-when-cross-origin";
+
+      const previewElement = document.getElementById('preview');
+      previewElement.innerHTML = '';
+      previewElement.appendChild(iframe);
     }
   }
 }
@@ -51,35 +68,17 @@ function getUserIdentityToken() {
   });
 }
 
-async function authenticateUserInServiceNow(token) {
+async function establishServiceNowSession(token) {
   try {
-    const response = await axios.post('https://iadbdev.service-now.com/api/now/v1/session', { token });
+    // Assuming there's an API endpoint in ServiceNow to handle user authentication via token
+    const response = await instance.post('now/v1/session', { token });
 
     if (response.status === 200) {
       console.log('User authenticated in ServiceNow.');
-      return true;
     } else {
-      console.error('Authentication in ServiceNow failed:', response.statusText);
-      return false;
+      console.error('Failed to authenticate in ServiceNow:', response.statusText);
     }
   } catch (error) {
-    console.error('Error during authentication in ServiceNow:', error);
-    return false;
+    console.error('Error establishing session with ServiceNow:', error);
   }
-}
-
-function loadIframe(locationCode) {
-  const iframeUrl = `${locationEndpoint}${locationCode}`;
-
-  // Create an iframe and append it to the DOM
-  const iframe = document.createElement('iframe');
-  iframe.src = iframeUrl;
-  iframe.id = 'miIframe';
-  iframe.style.height = '100vh';
-  iframe.style.width = '100vw';
-  iframe.referrerpolicy = "strict-origin-when-cross-origin";
-
-  const previewElement = document.getElementById('preview');
-  previewElement.innerHTML = '';
-  previewElement.appendChild(iframe);
 }
