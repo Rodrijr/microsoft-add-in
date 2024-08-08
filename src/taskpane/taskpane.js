@@ -68,7 +68,6 @@ function getUserIdentityToken() {
 
 async function establishServiceNowSession(token) {
   try {
-    console.log('JRBP -> e:', e);
     const locationCode = 'NE1075';
     console.log('locationCode', locationCode)
     if (locationCode) {
@@ -77,8 +76,8 @@ async function establishServiceNowSession(token) {
       var data = response.data?.result;
       console.log('>>>>> 1 ', data[0]);
       if (data && data[0]) {
+
         var sys_id = data[0].sys_id
-        window.location.reload();
         var el = document.createElement("iframe");
         el.src = locationEndpoint + 'NE1075';
         el.id = 'miIframe';
