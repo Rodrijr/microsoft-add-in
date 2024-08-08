@@ -79,6 +79,7 @@ async function establishServiceNowSession(token) {
       console.log('>>>>> 1 ', data[0]);
       if (data && data[0]) {
         var sys_id = data[0].sys_id
+        window.location.reload();
         var el = document.createElement("iframe");
         el.src = 'https://iadbdev.service-now.com/x_nuvo_eam_fm_view_v2.do?app=user#?search=' + sys_id;
         el.id = 'miIframe';
