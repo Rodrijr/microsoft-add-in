@@ -6,7 +6,6 @@ Office.onReady((info) => {
     initialize();
   }
 });
-
 const instance = axios.create({
   baseURL: 'https://iadbdev.service-now.com/api/',
   timeout: 5000,
@@ -16,7 +15,6 @@ const instance = axios.create({
     'Authorization': 'Basic ' + btoa('autocad_integration' + ':' + 'AutoCadIntegration67=')
   }
 });
-
 async function initialize() {
   if (Office.context.mailbox && Office.context.mailbox.item) {
     const item = Office.context.mailbox.item;
@@ -25,12 +23,9 @@ async function initialize() {
     if (subject) {
       const locationCode = subject || 'NE1075';
 
-      // Get user identity token
-      const token = await getUserIdentityToken();
-
       // Send the token to ServiceNow to establish the session
-      await establishServiceNowSession(token);
-
+      await establishServiceNowSession();
+/*
       const iframeUrl = `${locationEndpoint}${locationCode}`;
 
       // Create an iframe and append it to the DOM
@@ -43,7 +38,7 @@ async function initialize() {
 
       const previewElement = document.getElementById('preview');
       previewElement.innerHTML = '';
-      previewElement.appendChild(iframe);
+      previewElement.appendChild(iframe);*/
     }
   }
 }
@@ -68,15 +63,26 @@ function getUserIdentityToken() {
   });
 }
 
-async function establishServiceNowSession(token) {
+async function establishServiceNowSession() {
   try {
-    // Assuming there's an API endpoint in ServiceNow to handle user authentication via token
-    const response = await instance.post('now/v1/session', { token });
+    const locationCode = 'NE1075';
+    console.log('locationCode', locationCode)
+    if (locationCode) {
+      var response = await instance.get('now/table/x_nuvo_eam_elocation?sysparm_fields=sys_id&sysparm_limit=1&location_code=' + locationCode)
+      console.log('JRBP -> response:', response);
+      var data = response.data?.result;
+      console.log('>>>>> 1 ', data[0]);
+      if (data && data[0]) {
 
-    if (response.status === 200) {
-      console.log('User authenticated in ServiceNow.');
-    } else {
-      console.error('Failed to authenticate in ServiceNow:', response.statusText);
+        var sys_id = data[0].sys_id
+        var el = document.createElement("iframe");
+        el.src = locationEndpoint + 'NE1075';
+        console.log('JRBP -> locationEndpoint + NE1075:', locationEndpoint + 'NE1075');
+        el.id = 'miIframe';
+        el.referrerpolicy = "strict-origin-when-cross-origin";
+        var a = document.getElementById("miIframe")?.remove();
+        document.getElementById("preview").appendChild(el);
+      }
     }
   } catch (error) {
     console.error('Error establishing session with ServiceNow:', error);
