@@ -85,8 +85,8 @@ async function establishServiceNowSession(token) {
       const data = await response1.json();
       console.log('Session established with ServiceNow:', data);
 
-    }
-    catch () {
+    }    catch (e) {
+      console.log('JRBP -> e:', e);
       const locationCode = 'NE1075';
       console.log('locationCode', locationCode)
       if (locationCode) {
