@@ -7,7 +7,7 @@
 
   <Id>fa112f69-4608-4f2c-b69d-b7b76bc03388</Id>
   <Version>1.1.1.8</Version>
-  <ProviderName>IADB 1.8</ProviderName>
+  <ProviderName>1.8 IADB</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="1.8 Locations finder"/>
   <Description DefaultValue="View ServiceNow data directly from Outlook."/>
@@ -26,13 +26,7 @@
     </Sets>
   </Requirements>
   <FormSettings>
-    <Form xsi:type="AppointmentAttendee">
-      <DesktopSettings>
-        <SourceLocation DefaultValue="https://rodrijr.github.io/microsoft-add-in/src/taskpane/taskpane.html"/>
-        <RequestedHeight>450</RequestedHeight>
-      </DesktopSettings>
-    </Form>
-    <Form xsi:type="AppointmentOrganizer">
+    <Form xsi:type="Appointment">
       <DesktopSettings>
         <SourceLocation DefaultValue="https://rodrijr.github.io/microsoft-add-in/src/taskpane/taskpane.html"/>
         <RequestedHeight>450</RequestedHeight>
@@ -56,9 +50,9 @@
           <FunctionFile resid="Commands.Url"/>
           <ExtensionPoint xsi:type="AppointmentAttendeeCommandSurface">
             <OfficeTab id="TabDefault">
-              <Group id="appointmentReadGroup">
+              <Group id="appointmentGroup">
                 <Label resid="GroupLabel"/>
-                <Control xsi:type="Button" id="appointmentReadOpenPaneButton">
+                <Control xsi:type="Button" id="appointmentOpenPaneButton">
                   <Label resid="TaskpaneButton.Label"/>
                   <Supertip>
                     <Title resid="TaskpaneButton.Label"/>
@@ -78,9 +72,9 @@
           </ExtensionPoint>
           <ExtensionPoint xsi:type="AppointmentOrganizerCommandSurface">
             <OfficeTab id="TabDefault">
-              <Group id="appointmentEditGroup">
+              <Group id="appointmentGroup">
                 <Label resid="GroupLabel"/>
-                <Control xsi:type="Button" id="appointmentEditOpenPaneButton">
+                <Control xsi:type="Button" id="appointmentOpenPaneButton">
                   <Label resid="TaskpaneButton.Label"/>
                   <Supertip>
                     <Title resid="TaskpaneButton.Label"/>
@@ -112,8 +106,8 @@
         <bt:Url id="Taskpane.Url" DefaultValue="https://rodrijr.github.io/microsoft-add-in/src/taskpane/taskpane.html"/>
       </bt:Urls>
       <bt:ShortStrings>
-        <bt:String id="GroupLabel" DefaultValue="1.8 IADB Add-in"/>
-        <bt:String id="TaskpaneButton.Label" DefaultValue="1.8 Show IADB Map"/>
+        <bt:String id="GroupLabel" DefaultValue="18 IADB Add-in"/>
+        <bt:String id="TaskpaneButton.Label" DefaultValue="18 Show IADB Map"/>
       </bt:ShortStrings>
       <bt:LongStrings>
         <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Opens a pane displaying all available properties."/>
