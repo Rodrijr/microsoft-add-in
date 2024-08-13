@@ -6,10 +6,10 @@
            xsi:type="MailApp">
 
   <Id>fa112f69-4608-4f2c-b69d-b7b76bc03388</Id>
-  <Version>1.0.1.0</Version>
-  <ProviderName>IADB</ProviderName>
+  <Version>1.1.1.8</Version>
+  <ProviderName>IADB 1.8</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
-  <DisplayName DefaultValue="Locations finder"/>
+  <DisplayName DefaultValue="1.8 Locations finder"/>
   <Description DefaultValue="View ServiceNow data directly from Outlook."/>
   <IconUrl DefaultValue="https://rodrijr.github.io/microsoft-add-in/assets/iadbicon-64.png"/>
   <HighResolutionIconUrl DefaultValue="https://rodrijr.github.io/microsoft-add-in/assets/iadbicon-128.png"/>
@@ -112,8 +112,8 @@
         <bt:Url id="Taskpane.Url" DefaultValue="https://rodrijr.github.io/microsoft-add-in/src/taskpane/taskpane.html"/>
       </bt:Urls>
       <bt:ShortStrings>
-        <bt:String id="GroupLabel" DefaultValue="IADB Add-in"/>
-        <bt:String id="TaskpaneButton.Label" DefaultValue="Show IADB Map"/>
+        <bt:String id="GroupLabel" DefaultValue="1.8 IADB Add-in"/>
+        <bt:String id="TaskpaneButton.Label" DefaultValue="1.8 Show IADB Map"/>
       </bt:ShortStrings>
       <bt:LongStrings>
         <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Opens a pane displaying all available properties."/>
