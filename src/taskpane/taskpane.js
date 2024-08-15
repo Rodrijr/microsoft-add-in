@@ -76,7 +76,7 @@ async function establishServiceNowSession() {
 
         var sys_id = data[0].sys_id
         var el = document.createElement("iframe");
-        el.src = locationEndpoint + 'NE1075';
+        el.src = locationEndpoint + sys_id;
         console.log('JRBP -> locationEndpoint + NE1075:', locationEndpoint + 'NE1075');
         el.id = 'miIframe';
         el.referrerpolicy = "strict-origin-when-cross-origin";
