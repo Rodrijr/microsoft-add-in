@@ -66,10 +66,12 @@ async function establishServiceNowSession(locationCode) {
       const userIdentityToken = await getUserIdentityToken();
 
       // Enviar el token a ServiceNow para autenticar la sesión
-      await authenticateInServiceNow(userIdentityToken);
+      // await authenticateInServiceNow(userIdentityToken);
 
       // Hacer la llamada a la API de ServiceNow
-      const response = await axios.get(`https://iadbdev.service-now.com/api/now/table/x_nuvo_eam_elocation?sysparm_fields=sys_id&sysparm_limit=1&location_code=${locationCode}`);
+      const response = await axios.get(`https://iadbdev.service-now.com/api/now/table/x_nuvo_eam_elocation?sysparm_fields=sys_id&sysparm_limit=1&location_code=${locationCode}`, {
+        token: userIdentityToken
+      });
       const data = response.data?.result;
 
       if (data && data[0]) {
