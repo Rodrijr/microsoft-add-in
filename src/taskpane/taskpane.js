@@ -47,7 +47,7 @@ async function initialize() {
       // Create an iframe and append it to the DOM
       const iframe = document.createElement('iframe');
       iframe.src = iframeUrl;
-      iframe.id = 'miIframe';
+      iframe.id = 'miIframe1';
       iframe.style.height = '100vh';
       iframe.style.width = '100vw';
       iframe.referrerpolicy = "strict-origin-when-cross-origin";
@@ -93,9 +93,9 @@ async function establishServiceNowSession(locationCode) {
         var el = document.createElement("iframe");
         el.src = locationEndpoint + sys_id;
         console.log('JRBP -> locationEndpoint + NE1075:', locationEndpoint + 'NE1075');
-        el.id = 'miIframe';
+        el.id = 'miIframe1';
         el.referrerpolicy = "strict-origin-when-cross-origin";
-        var a = document.getElementById("miIframe")?.remove();
+        var a = document.getElementById("miIframe1")?.remove();
         document.getElementById("preview").appendChild(el);
       }
     }
