@@ -36,13 +36,6 @@ function redirectToLogin() {
   window.open(loginUrl, '_blank');
 }
 
-const msalConfig = {
-  auth: {
-    clientId: "9555e20f-87c2-4104-95a3-87ecb6012e38",
-    authority: "https://login.microsoftonline.com/9dfb1a05-5f1d-449a-8960-62abcb479e7d",
-    redirectUri: "https://iadbdev.service-now.com/oauth_redirect.do"
-  }
-};
 
 const msalInstance = new msal.PublicClientApplication(msalConfig);
 
