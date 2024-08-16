@@ -17,8 +17,10 @@ const instance = axios.create({
 });
 async function initialize() {
   if (Office.context.mailbox && Office.context.mailbox.item) {
-    const item = Office.context.mailbox.item;
+    console.log('JRBP -> Office.context.mailbox:', Office.context.mailbox);
+    console.log('JRBP ->  Office.context.mailbox.item:',  Office.context.mailbox.item);
     console.log('>>>>> SUBJECT: ', item.subject )
+    const item = Office.context.mailbox.item;
     const subject = getLocationCode(item.subject);
 
     if (subject) {
