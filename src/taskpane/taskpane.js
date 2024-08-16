@@ -37,25 +37,7 @@ async function initialize() {
     const subject = 'NE1075' || getLocationCode(sub);
 
     if (subject) {
-      // const locationCode = subject || 'NE1075';
-      // const locationCode = 'NE1075';
-
-      // Send the token to ServiceNow to establish the session
       await establishServiceNowSession(subject);
-      /*
-            const iframeUrl = `${locationEndpoint}${locationCode}`;
-
-            // Create an iframe and append it to the DOM
-            const iframe = document.createElement('iframe');
-            iframe.src = iframeUrl;
-            iframe.id = 'miIframe';
-            iframe.style.height = '100vh';
-            iframe.style.width = '100vw';
-            iframe.referrerpolicy = "strict-origin-when-cross-origin";
-
-            const previewElement = document.getElementById('preview');
-            previewElement.innerHTML = '';
-            previewElement.appendChild(iframe);*/
     }
   }
 }
@@ -82,10 +64,10 @@ function getUserIdentityToken() {
 }
 
 async function establishServiceNowSession(locationCode) {
-  console.log('JRBP ->=-a=dscasdcadscadsc asdc asdc locationCode:', locationCode);
   if (locationCode) {
     try {
-      console.log('locationCode', locationCode)
+      getUserIdentityToken()
+
       var sys_id = await getLocationID(locationCode);
     } catch (error) {
       console.error('Error establishing session with ServiceNow:', error.response.status);
