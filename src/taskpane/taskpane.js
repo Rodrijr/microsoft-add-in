@@ -116,3 +116,4 @@ async function getLocationID(locationCode) {
   return sys_id;
 }
 
+Office.actions.associate("action", initialize);
