@@ -103,7 +103,24 @@ async function establishServiceNowSession(locationCode) {
       // document.location =
       }
     } catch (error) {
-      console.error('Error establishing session with ServiceNow:', error);
+      console.error('Error establishing session with ServiceNow:', error.response.status);
+      console.error('Error establishing session with ServiceNow:', error.response.statusText);
+      Office.context.ui.displayDialogAsync('https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do?location=' + subject1,
+        { height: 45, width: 55 },
+        function (asyncResult) {
+          if (asyncResult.status === Office.AsyncResultStatus.Failed) {
+            // Show an error message
+            console.log('Failed to open dialog: ' + asyncResult.error.message);
+          } else {
+            var dialog = asyncResult.value;
+            dialog.addEventHandler(Office.EventType.DialogMessageReceived, function (args) {
+              console.log('Message received from dialog: ' + args.message);
+            });
+            dialog.addEventHandler(Office.EventType.DialogEventReceived, function (args) {
+              console.log('Dialog closed: ' + args.error.message);
+            });
+          }
+        });
     }
   }
 }
