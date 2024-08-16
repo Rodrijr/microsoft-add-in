@@ -98,7 +98,7 @@ async function establishServiceNowSession(locationCode) {
         el.id = 'miIframe';
         el.sandbox = "allow-top-navigation allow-scripts allow-same-origin";
         el.referrerpolicy = "strict-origin-when-cross-origin";
-        var a = document.getElementById("miIframe")?.remove();
+        //var a = document.getElementById("miIframe")?.remove();
         document.getElementById("preview").appendChild(el);
       }
     } catch (error) {
