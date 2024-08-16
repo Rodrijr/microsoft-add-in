@@ -27,7 +27,8 @@ async function checkServiceNowSession() {
     }
   } catch (error) {
     console.error('Session is not active, redirecting to login.');
-    redirectToLogin();
+    // redirectToLogin();
+    authenticateUser()
   }
 }
 function redirectToLogin() {
@@ -35,7 +36,29 @@ function redirectToLogin() {
   window.open(loginUrl, '_blank');
 }
 
+function authenticateUser() {
+  const authWindow = window.open('https://login.microsoftonline.com/<your-tenant-id>/oauth2/v2.0/authorize?...', '_blank', 'width=600,height=600');
 
+  const intervalId = setInterval(() => {
+    try {
+      if (authWindow.location.href.includes('redirect_uri')) {
+        // Extraer el token de la URL de redirección
+        const urlParams = new URLSearchParams(authWindow.location.search);
+        const token = urlParams.get('access_token');
+
+        // Cerrar la ventana de autenticación
+        authWindow.close();
+
+        // Guardar el token para futuras solicitudes
+        sessionStorage.setItem('auth_token', token);
+
+        clearInterval(intervalId);
+      }
+    } catch (error) {
+      // Continuar intentando hasta que la ventana se redirija correctamente
+    }
+  }, 1000);
+}
 
 /*
 
