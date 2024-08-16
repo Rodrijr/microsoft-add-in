@@ -20,6 +20,7 @@ fucntion subjectCB(result){
   return result;
 }
 async function initialize() {
+
   if (Office.context.mailbox && Office.context.mailbox.item) {
     console.log('JRBP -> Office.context.mailbox:', Office.context.mailbox);
     console.log('JRBP ->  Office.context.mailbox.item:',  Office.context.mailbox.item);
