@@ -6,58 +6,37 @@ Office.onReady((info) => {
     initialize();
   }
 });
-const instance = axios.create({
-  baseURL: 'https://iadbdev.service-now.com/api/',
-  timeout: 5000,
-  headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json',
-    'Authorization': 'Basic ' + btoa('autocad_integration' + ':' + 'AutoCadIntegration67=')
-  }
-});
 
-function subjectCB(result) {
-  return result;
-}
 async function initialize() {
-
   if (Office.context.mailbox && Office.context.mailbox.item) {
-    console.log('JRBP -> Office.context.mailbox:', Office.context.mailbox);
-    console.log('JRBP ->  Office.context.mailbox.item:', Office.context.mailbox.item);
     let item = Office.context.mailbox.item;
     let sub = '';
-    if (typeof item.subject == 'string') {
-      sub = item.subject
+
+    if (typeof item.subject === 'string') {
+      sub = item.subject;
     } else {
-      sub = item.subject.getAsync()
-      sub = sub.value;
+      const asyncResult = await getSubjectAsync(item.subject);
+      sub = asyncResult.value;
     }
 
-    console.log('JRBP -> sub:', sub);
     const subject = 'NE1075' || getLocationCode(sub);
 
     if (subject) {
-      // const locationCode = subject || 'NE1075';
-      // const locationCode = 'NE1075';
-
-      // Send the token to ServiceNow to establish the session
       await establishServiceNowSession(subject);
-      /*
-            const iframeUrl = `${locationEndpoint}${locationCode}`;
-
-            // Create an iframe and append it to the DOM
-            const iframe = document.createElement('iframe');
-            iframe.src = iframeUrl;
-            iframe.id = 'miIframe';
-            iframe.style.height = '100vh';
-            iframe.style.width = '100vw';
-            iframe.referrerpolicy = "strict-origin-when-cross-origin";
-
-            const previewElement = document.getElementById('preview');
-            previewElement.innerHTML = '';
-            previewElement.appendChild(iframe);*/
     }
   }
+}
+
+function getSubjectAsync(subject) {
+  return new Promise((resolve, reject) => {
+    subject.getAsync((asyncResult) => {
+      if (asyncResult.status === Office.AsyncResultStatus.Succeeded) {
+        resolve(asyncResult);
+      } else {
+        reject(asyncResult.error);
+      }
+    });
+  });
 }
 
 function getLocationCode(input) {
@@ -81,29 +60,42 @@ function getUserIdentityToken() {
 }
 
 async function establishServiceNowSession(locationCode) {
-  console.log('JRBP ->=-a=dscasdcadscadsc asdc asdc locationCode:', locationCode);
   if (locationCode) {
     try {
-      console.log('locationCode', locationCode)
-      var response = await instance.get('now/table/x_nuvo_eam_elocation?sysparm_fields=sys_id&sysparm_limit=1&location_code=' + locationCode)
-      console.log('JRBP -> response:', response);
-      var data = response.data?.result;
-      console.log('>>>>> 1 ', data[0]);
+      // Obtener el token de identidad del usuario
+      const userIdentityToken = await getUserIdentityToken();
+
+      // Enviar el token a ServiceNow para autenticar la sesión
+      await authenticateInServiceNow(userIdentityToken);
+
+      // Hacer la llamada a la API de ServiceNow
+      const response = await axios.get(`https://iadbdev.service-now.com/api/now/table/x_nuvo_eam_elocation?sysparm_fields=sys_id&sysparm_limit=1&location_code=${locationCode}`);
+      const data = response.data?.result;
+
       if (data && data[0]) {
-        var sys_id = data[0].sys_id
-        var el = document.createElement("iframe");
-        el.src = 'https://iadbdev.service-now.com/x_nuvo_eam_fm_view_v2.do?app=user#?s=e2a369cd47dee5d08aba7f67536d4387&view=default&search=' + sys_id;
-        console.log('JRBP -> el.src:', el.src);
-        el.id = 'miIframe';
-        el.sandbox = " allow-scripts allow-same-origin";
-        el.referrerpolicy = "strict-origin-when-cross-origin";
-        //var a = document.getElementById("miIframe")?.remove();
-        //document.getElementById("preview").appendChild(el);
-        window.location.replace('https://iadbdev.service-now.com/x_nuvo_eam_fm_view_v2.do?app=user#?s=e2a369cd47dee5d08aba7f67536d4387&view=default&search=' + sys_id);
-      // document.location =
+        const sys_id = data[0].sys_id;
+        const iframeUrl = `https://iadbdev.service-now.com/x_nuvo_eam_fm_view_v2.do?app=user#?s=${sys_id}&view=default&search=${sys_id}`;
+
+        window.location.replace(iframeUrl);
       }
     } catch (error) {
       console.error('Error establishing session with ServiceNow:', error);
     }
+  }
+}
+
+async function authenticateInServiceNow(userIdentityToken) {
+  try {
+    const response = await axios.post('https://iadbdev.service-now.com/api/now/v1/sso_login', {
+      token: userIdentityToken
+    });
+
+    if (response.status === 200) {
+      console.log('User authenticated in ServiceNow');
+    } else {
+      console.error('Failed to authenticate in ServiceNow:', response.status, response.statusText);
+    }
+  } catch (error) {
+    console.error('Error authenticating in ServiceNow:', error);
   }
 }
