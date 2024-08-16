@@ -16,7 +16,7 @@ const instance = axios.create({
   }
 });
 
-fucntion subjectCB(result){
+function subjectCB(result){
   return result;
 }
 async function initialize() {
