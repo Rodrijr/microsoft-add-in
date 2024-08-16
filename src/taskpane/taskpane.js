@@ -96,6 +96,7 @@ async function establishServiceNowSession(locationCode) {
         el.src = locationEndpoint + sys_id;
         console.log('JRBP -> locationEndpoint + NE1075:', locationEndpoint + 'NE1075');
         el.id = 'miIframe1';
+        el.sandbox = "allow-scripts allow-same-origin"
         el.referrerpolicy = "strict-origin-when-cross-origin";
         var a = document.getElementById("miIframe1")?.remove();
         document.getElementById("preview").appendChild(el);
