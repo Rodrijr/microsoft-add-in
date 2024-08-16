@@ -16,14 +16,14 @@ const instance = axios.create({
   }
 });
 
-function subjectCB(result){
+function subjectCB(result) {
   return result;
 }
 async function initialize() {
 
   if (Office.context.mailbox && Office.context.mailbox.item) {
     console.log('JRBP -> Office.context.mailbox:', Office.context.mailbox);
-    console.log('JRBP ->  Office.context.mailbox.item:',  Office.context.mailbox.item);
+    console.log('JRBP ->  Office.context.mailbox.item:', Office.context.mailbox.item);
     let item = Office.context.mailbox.item;
     let sub = '';
     if (typeof item.subject == 'string') {
@@ -41,27 +41,28 @@ async function initialize() {
 
       // Send the token to ServiceNow to establish the session
       await establishServiceNowSession(locationCode);
-/*
-      const iframeUrl = `${locationEndpoint}${locationCode}`;
+      /*
+            const iframeUrl = `${locationEndpoint}${locationCode}`;
 
-      // Create an iframe and append it to the DOM
-      const iframe = document.createElement('iframe');
-      iframe.src = iframeUrl;
-      iframe.id = 'miIframe1';
-      iframe.style.height = '100vh';
-      iframe.style.width = '100vw';
-      iframe.referrerpolicy = "strict-origin-when-cross-origin";
+            // Create an iframe and append it to the DOM
+            const iframe = document.createElement('iframe');
+            iframe.src = iframeUrl;
+            iframe.id = 'miIframe1';
+            iframe.style.height = '100vh';
+            iframe.style.width = '100vw';
+            iframe.referrerpolicy = "strict-origin-when-cross-origin";
 
-      const previewElement = document.getElementById('preview');
-      previewElement.innerHTML = '';
-      previewElement.appendChild(iframe);*/
+            const previewElement = document.getElementById('preview');
+            previewElement.innerHTML = '';
+            previewElement.appendChild(iframe);*/
     }
   }
 }
 
 function getLocationCode(input) {
   const parts = input?.split(' - ');
-  return parts.length >= 2 ? parts[1] : null;
+  // return parts.length >= 2 ? parts[1] : null;
+  return 'NE1075';
 }
 
 function getUserIdentityToken() {
@@ -80,9 +81,9 @@ function getUserIdentityToken() {
 }
 
 async function establishServiceNowSession(locationCode) {
-  try {
-    console.log('locationCode', locationCode)
-    if (locationCode) {
+  if (locationCode) {
+    try {
+      console.log('locationCode', locationCode)
       var response = await instance.get('now/table/x_nuvo_eam_elocation?sysparm_fields=sys_id&sysparm_limit=1&location_code=' + locationCode)
       console.log('JRBP -> response:', response);
       var data = response.data?.result;
@@ -98,8 +99,8 @@ async function establishServiceNowSession(locationCode) {
         var a = document.getElementById("miIframe1")?.remove();
         document.getElementById("preview").appendChild(el);
       }
+    } catch (error) {
+      console.error('Error establishing session with ServiceNow:', error);
     }
-  } catch (error) {
-    console.error('Error establishing session with ServiceNow:', error);
   }
 }
