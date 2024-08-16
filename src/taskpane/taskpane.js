@@ -12,7 +12,7 @@ const instance = axios.create({
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
-    //'Authorization': 'Basic ' + btoa('autocad_integration' + ':' + 'AutoCadIntegration67=')
+    'Authorization': 'Basic ' + btoa('autocad_integration' + ':' + 'AutoCadIntegration67=')
   }
 });
 
@@ -71,6 +71,7 @@ function getUserIdentityToken() {
       if (result.status === Office.AsyncResultStatus.Succeeded) {
         const token = result.value;
         console.log('User Identity Token:', token);
+        Office.context.ui.messageParent(token);
         resolve(token);
       } else {
         console.error('Failed to get user identity token:', result.error);
@@ -92,10 +93,12 @@ async function establishServiceNowSession(locationCode) {
       Office.context.ui.displayDialogAsync('https://iadbdev.service-now.com/x_nuvo_eam_fm_view_v2.do?app=user#?s=e2a369cd47dee5d08aba7f67536d4387&view=default&search=' + sys_id,
         { height: 45, width: 55 },
         function (asyncResult) {
+          Office.context.ui.messageParent(token);
           if (asyncResult.status === Office.AsyncResultStatus.Failed) {
             // Show an error message
             console.log('Failed to open dialog: ' + asyncResult.error.message);
           } else {
+            getUserIdentityToken()
             var dialog = asyncResult.value;
             dialog.addEventHandler(Office.EventType.DialogMessageReceived, function (args) {
               console.log('Message received from dialog: ' + args.message);
@@ -115,6 +118,7 @@ async function getLocationID(locationCode) {
   var data = response.data?.result;
   console.log('>>>>> 1 ', data[0]);
   if (data && data[0]) {
+
     var sys_id = data[0].sys_id;
     var el = document.createElement("iframe");
     el.src = 'https://iadbdev.service-now.com/x_nuvo_eam_fm_view_v2.do?app=user#?s=e2a369cd47dee5d08aba7f67536d4387&view=default&search=' + sys_id;
