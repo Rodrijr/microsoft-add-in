@@ -28,7 +28,7 @@ async function checkServiceNowSession() {
   } catch (error) {
     console.error('Session is not active, redirecting to login.');
     // redirectToLogin();
-    authenticateUser()
+    login()
   }
 }
 function redirectToLogin() {
@@ -36,28 +36,29 @@ function redirectToLogin() {
   window.open(loginUrl, '_blank');
 }
 
-function authenticateUser() {
-  const authWindow = window.open('https://login.microsoftonline.com/<your-tenant-id>/oauth2/v2.0/authorize?...', '_blank', 'width=600,height=600');
+const msalConfig = {
+  auth: {
+    clientId: "9555e20f-87c2-4104-95a3-87ecb6012e38",
+    authority: "https://login.microsoftonline.com/9dfb1a05-5f1d-449a-8960-62abcb479e7d",
+    redirectUri: "https://iadbdev.service-now.com/oauth_redirect.do"
+  }
+};
 
-  const intervalId = setInterval(() => {
-    try {
-      if (authWindow.location.href.includes('redirect_uri')) {
-        // Extraer el token de la URL de redirección
-        const urlParams = new URLSearchParams(authWindow.location.search);
-        const token = urlParams.get('access_token');
+const msalInstance = new msal.PublicClientApplication(msalConfig);
 
-        // Cerrar la ventana de autenticación
-        authWindow.close();
+function login() {
+  const loginRequest = {
+    scopes: ["User.Read"]
+  };
 
-        // Guardar el token para futuras solicitudes
-        sessionStorage.setItem('auth_token', token);
-
-        clearInterval(intervalId);
-      }
-    } catch (error) {
-      // Continuar intentando hasta que la ventana se redirija correctamente
-    }
-  }, 1000);
+  msalInstance.loginPopup(loginRequest)
+    .then(response => {
+      console.log('Access token acquired:', response.accessToken);
+      sessionStorage.setItem('auth_token', response.accessToken);
+    })
+    .catch(error => {
+      console.error('Login failed:', error);
+    });
 }
 
 /*
