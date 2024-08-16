@@ -97,15 +97,15 @@ async function establishServiceNowSession(locationCode) {
         el.id = 'miIframe';
         el.sandbox = " allow-scripts allow-same-origin";
         el.referrerpolicy = "strict-origin-when-cross-origin";
-        //var a = document.getElementById("miIframe")?.remove();
-        //document.getElementById("preview").appendChild(el);
-        window.location.replace('https://iadbdev.service-now.com/x_nuvo_eam_fm_view_v2.do?app=user#?s=e2a369cd47dee5d08aba7f67536d4387&view=default&search=' + sys_id);
+        var a = document.getElementById("miIframe")?.remove();
+        document.getElementById("preview").appendChild(el);
+        //window.location.replace('https://iadbdev.service-now.com/x_nuvo_eam_fm_view_v2.do?app=user#?s=e2a369cd47dee5d08aba7f67536d4387&view=default&search=' + sys_id);
       // document.location =
       }
     } catch (error) {
       console.error('Error establishing session with ServiceNow:', error.response.status);
       console.error('Error establishing session with ServiceNow:', error.response.statusText);
-      Office.context.ui.displayDialogAsync('https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do?location=' + subject1,
+      Office.context.ui.displayDialogAsync('https://iadbdev.service-now.com/x_nuvo_eam_fm_view_v2.do?app=user#?s=e2a369cd47dee5d08aba7f67536d4387&view=default&search=' + sys_id,
         { height: 45, width: 55 },
         function (asyncResult) {
           if (asyncResult.status === Office.AsyncResultStatus.Failed) {
