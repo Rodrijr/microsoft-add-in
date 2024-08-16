@@ -23,8 +23,10 @@ async function initialize() {
   if (Office.context.mailbox && Office.context.mailbox.item) {
     console.log('JRBP -> Office.context.mailbox:', Office.context.mailbox);
     console.log('JRBP ->  Office.context.mailbox.item:',  Office.context.mailbox.item);
+    let item = Office.context.mailbox.item;
     console.log('>>>>> SUBJECT: ', item.subject.getAsync() )
-    const item = Office.context.mailbox.item.subject.getAsync();
+    item = item.subject.getAsync()
+    console.log('JRBP -> item:', item);
     const subject = getLocationCode(item.value);
 
     if (subject) {
