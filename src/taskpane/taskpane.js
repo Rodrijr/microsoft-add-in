@@ -25,10 +25,16 @@ async function initialize() {
     console.log('JRBP -> Office.context.mailbox:', Office.context.mailbox);
     console.log('JRBP ->  Office.context.mailbox.item:',  Office.context.mailbox.item);
     let item = Office.context.mailbox.item;
-    console.log('>>>>> SUBJECT: ', item.subject.getAsync() )
-    item = item.subject.getAsync()
-    console.log('JRBP -> item:', item);
-    const subject = getLocationCode(item.value);
+    let sub = '';
+    if (typeof item.subject == 'string') {
+      sub = item.subject
+    } else {
+      sub = item.subject.getAsync()
+      sub = sub.value;
+    }
+
+    console.log('JRBP -> sub:', sub);
+    const subject = getLocationCode(sub);
 
     if (subject) {
       const locationCode = subject || 'NE1075';
