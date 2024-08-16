@@ -38,10 +38,10 @@ async function initialize() {
 
     if (subject) {
       // const locationCode = subject || 'NE1075';
-      const locationCode = 'NE1075';
+      // const locationCode = 'NE1075';
 
       // Send the token to ServiceNow to establish the session
-      await establishServiceNowSession(locationCode);
+      await establishServiceNowSession('NE1075');
       /*
             const iframeUrl = `${locationEndpoint}${locationCode}`;
 
