@@ -37,7 +37,8 @@ async function initialize() {
     const subject = getLocationCode(sub);
 
     if (subject) {
-      const locationCode = subject || 'NE1075';
+      // const locationCode = subject || 'NE1075';
+      const locationCode = 'NE1075';
 
       // Send the token to ServiceNow to establish the session
       await establishServiceNowSession(locationCode);
@@ -61,8 +62,7 @@ async function initialize() {
 
 function getLocationCode(input) {
   const parts = input?.split(' - ');
-  // return parts.length >= 2 ? parts[1] : null;
-  return 'NE1075';
+  return parts.length >= 2 ? parts[1] : null;
 }
 
 function getUserIdentityToken() {
@@ -81,6 +81,7 @@ function getUserIdentityToken() {
 }
 
 async function establishServiceNowSession(locationCode) {
+  console.log('JRBP ->=-a=dscasdcadscadsc asdc asdc locationCode:', locationCode);
   if (locationCode) {
     try {
       console.log('locationCode', locationCode)
