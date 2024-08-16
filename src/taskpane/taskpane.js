@@ -6,13 +6,52 @@ Office.onReady((info) => {
     initialize();
   }
 });
+
+
+
+
+async function initialize() {
+  if (Office.context.mailbox && Office.context.mailbox.item) {
+    await checkServiceNowSession();
+  }
+}
+
+async function checkServiceNowSession() {
+  try {
+    // Realiza una solicitud simple para verificar si la sesión está activa
+    const response = await axios.get('https://iadbdev.service-now.com/api/now/table/x_nuvo_eam_elocation?sysparm_limit=1');
+
+    if (response.status === 200) {
+      console.log('Session is active.');
+      // La sesión está activa, continúa con la lógica de tu Task Pane
+    }
+  } catch (error) {
+    console.error('Session is not active, redirecting to login.');
+    redirectToLogin();
+  }
+}
+
+function redirectToLogin() {
+  const loginUrl = 'https://iadbdev.service-now.com';
+  document.getElementById('iframeContainer').innerHTML = `<iframe src="${loginUrl}" style="width:100%; height:100%;" frameborder="0"></iframe>`;
+}
+
+
+
+
+/*
+
+
+
+
+
 const instance = axios.create({
   baseURL: 'https://iadbdev.service-now.com/api/',
   timeout: 5000,
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
-    'Authorization': 'Basic ' + btoa('autocad_integration' + ':' + 'AutoCadIntegration67=')
+    'Authorization': 'Basic ' + btoa('user' + ':' + 'pass=')
   }
 });
 
@@ -94,7 +133,7 @@ async function establishServiceNowSession(locationCode) {
     }
   }
 }
-const authToken = 'Basic ' + btoa('autocad_integration' + ':' + 'AutoCadIntegration67=');
+const authToken = 'Basic ' + btoa('user' + ':' + 'pass=');
 
 async function getLocationID(locationCode) {
   var response = await instance.get('now/table/x_nuvo_eam_elocation?sysparm_fields=sys_id&sysparm_limit=1&location_code=' + locationCode);
@@ -120,3 +159,6 @@ async function getLocationID(locationCode) {
 }
 
 Office.actions.associate("action", initialize);
+
+
+*/
