@@ -34,14 +34,14 @@ async function initialize() {
     }
 
     console.log('JRBP -> sub:', sub);
-    const subject = getLocationCode(sub);
+    const subject = 'NE1075' || getLocationCode(sub);
 
     if (subject) {
       // const locationCode = subject || 'NE1075';
       // const locationCode = 'NE1075';
 
       // Send the token to ServiceNow to establish the session
-      await establishServiceNowSession('NE1075');
+      await establishServiceNowSession(subject);
       /*
             const iframeUrl = `${locationEndpoint}${locationCode}`;
 
