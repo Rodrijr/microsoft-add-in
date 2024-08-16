@@ -46,13 +46,17 @@ function action(event) {
       if (asyncResult.status === Office.AsyncResultStatus.Failed) {
         // Show an error message
         console.log('Failed to open dialog: ' + asyncResult.error.message);
+
       } else {
+
+        console.log('JRBP -> asyncResult:', asyncResult);
         var dialog = asyncResult.value;
         dialog.addEventHandler(Office.EventType.DialogMessageReceived, function (args) {
-          console.log('Message received from dialog: ' + args.message);
+          console.log('Message received from dialog: ' + args);
         });
         dialog.addEventHandler(Office.EventType.DialogEventReceived, function (args) {
-          console.log('Dialog closed: ' + args.error.message);
+          console.log('Dialog closed: ' + args);
+
         });
       }
     });
