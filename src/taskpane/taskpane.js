@@ -33,7 +33,7 @@ async function checkServiceNowSession() {
 
 function redirectToLogin() {
   const loginUrl = 'https://iadbdev.service-now.com';
-  document.getElementById('iframeContainer').innerHTML = `<iframe src="${loginUrl}" style="width:100%; height:100%;" frameborder="0"></iframe>`;
+  document.getElementById('preview').innerHTML = `<iframe src="${loginUrl}" style="width:100%; height:100%;" frameborder="0"></iframe>`;
 }
 
 
