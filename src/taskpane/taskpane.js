@@ -48,7 +48,7 @@ async function initialize() {
             // Create an iframe and append it to the DOM
             const iframe = document.createElement('iframe');
             iframe.src = iframeUrl;
-            iframe.id = 'miIframe1';
+            iframe.id = 'miIframe';
             iframe.style.height = '100vh';
             iframe.style.width = '100vw';
             iframe.referrerpolicy = "strict-origin-when-cross-origin";
@@ -93,12 +93,12 @@ async function establishServiceNowSession(locationCode) {
 
         var sys_id = data[0].sys_id
         var el = document.createElement("iframe");
-        el.src = locationEndpoint + sys_id;
+        el.src = 'https://iadbdev.service-now.com/x_nuvo_eam_fm_view_v2.do?app=user#?s=e2a369cd47dee5d08aba7f67536d4387&view=default&search=' + sys_id;
         console.log('JRBP -> locationEndpoint + NE1075:', locationEndpoint + 'NE1075');
-        el.id = 'miIframe1';
+        el.id = 'miIframe';
         el.sandbox = "allow-scripts allow-same-origin"
         el.referrerpolicy = "strict-origin-when-cross-origin";
-        var a = document.getElementById("miIframe1")?.remove();
+        var a = document.getElementById("miIframe")?.remove();
         document.getElementById("preview").appendChild(el);
       }
     } catch (error) {
