@@ -40,7 +40,7 @@ async function initialize() {
       const locationCode = subject || 'NE1075';
 
       // Send the token to ServiceNow to establish the session
-      await establishServiceNowSession();
+      await establishServiceNowSession(locationCode);
 /*
       const iframeUrl = `${locationEndpoint}${locationCode}`;
 
@@ -79,9 +79,8 @@ function getUserIdentityToken() {
   });
 }
 
-async function establishServiceNowSession() {
+async function establishServiceNowSession(locationCode) {
   try {
-    const locationCode = 'NE1075';
     console.log('locationCode', locationCode)
     if (locationCode) {
       var response = await instance.get('now/table/x_nuvo_eam_elocation?sysparm_fields=sys_id&sysparm_limit=1&location_code=' + locationCode)
