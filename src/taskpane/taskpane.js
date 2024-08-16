@@ -15,13 +15,17 @@ const instance = axios.create({
     'Authorization': 'Basic ' + btoa('autocad_integration' + ':' + 'AutoCadIntegration67=')
   }
 });
+
+fucntion subjectCB(result){
+  return result;
+}
 async function initialize() {
   if (Office.context.mailbox && Office.context.mailbox.item) {
     console.log('JRBP -> Office.context.mailbox:', Office.context.mailbox);
     console.log('JRBP ->  Office.context.mailbox.item:',  Office.context.mailbox.item);
-    console.log('>>>>> SUBJECT: ', item.subject )
-    const item = Office.context.mailbox.item;
-    const subject = getLocationCode(item.subject);
+    console.log('>>>>> SUBJECT: ', item.subject.getAsync() )
+    const item = Office.context.mailbox.item.subject.getAsync();
+    const subject = getLocationCode(item.value);
 
     if (subject) {
       const locationCode = subject || 'NE1075';
