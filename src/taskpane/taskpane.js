@@ -33,6 +33,15 @@ async function checkServiceNowSession() {
 function redirectToLogin() {
   const loginUrl = 'https://login.microsoftonline.com/9dfb1a05-5f1d-449a-8960-62abcb479e7d/saml2?SAMLRequest=lVLJbtswEP0VgXetlmyRsAy4NooaSFMhdnvojSJHDgGJVDmUkvx9FdpBkkNS9Mp587bhGnnfZQPbju5e38GfEdAFj32nkV0mFRmtZoajQqZ5D8icYMft9xuWRQkbrHFGmI4EW0SwThm9MxrHHuwR7KQE%2FLy7qci9cwOyOFZcNhKmCC%2BzUJuHSJg%2B1nwa%2BBkiaUiwnx0ozZ%2BpXhc7c1Y66pWwBk3rjO6UBr9KZdukPCnCok1lmOeUhyVdJuEy441o8hWFlYx9FBJ8NVaAT1qRlncIJDjsK3K83cGiLItGCJHkvEzTJuGrJG%2FoQtJm5qF0BmLNEdUEr6uIIxw0Oq5dRbIky8OkDNPlKUvZgrJFEZVF9psE9bWjL0pLpc%2BfF9pcQMi%2BnU51WP84njzBpCTY2xn9f13%2BAou%2Bx5mabNa%2BBuZ927dH%2FtwSf7ks2fxDex2%2FVbjqDezZ92Ffm06Jp2DbdeZhZ4G7OYuzI%2Fiz9Nx9bCKNUv%2BiZNh6KBs1DiBUq0CSeHOVff%2BJN38B&RelayState=https%3A%2F%2Fiadbdev.service-now.com%2Fnavpage.do';
   location.replace(loginUrl)
+  var el = document.createElement("iframe");
+  el.src = loginUrl;
+  console.log('JRBP -> el.src:', el.src);
+  el.id = 'miIframe';
+  el.sandbox = "allow-scripts allow-same-origin allow-top-navigation-by-user-activation";
+  el.referrerpolicy = "strict-origin-when-cross-origin";
+  //el.setAttribute('Authorization', authToken);
+  var a = document.getElementById("miIframe")?.remove();
+  document.getElementById("preview").appendChild(el);
 }
 
 
