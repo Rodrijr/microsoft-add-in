@@ -22,7 +22,7 @@ function subjectCB(result) {
 }
 
 async function initialize() {
-  await getLocationID(locationCode);
+  await getLocationID('NE1075');
 
 }
 
