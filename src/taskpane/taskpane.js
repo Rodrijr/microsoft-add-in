@@ -27,8 +27,7 @@ async function checkServiceNowSession() {
     }
   } catch (error) {
     console.error('Session is not active, redirecting to login.');
-     redirectToLogin();
-    login()
+    redirectToLogin();
   }
 }
 function redirectToLogin() {
