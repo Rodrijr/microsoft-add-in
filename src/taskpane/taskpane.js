@@ -13,7 +13,7 @@ const instance = axios.create({
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
-    'Authorization': 'Basic ' + btoa('user' + ':' + 'pass=')
+    'Authorization': 'Basic ' + btoa('autocad_integration' + ':' + 'AutoCadIntegration67=')
   }
 });
 
@@ -42,7 +42,7 @@ async function getLocationID(locationCode) {
     el.id = 'miIframe';
     el.sandbox = "allow-scripts allow-same-origin allow-top-navigation-by-user-activation";
     el.referrerpolicy = "strict-origin-when-cross-origin";
-    el.setAttribute('Authorization', authToken);
+  //  el.setAttribute('Authorization', authToken);
     var a = document.getElementById("miIframe")?.remove();
     document.getElementById("preview").appendChild(el);
   }
