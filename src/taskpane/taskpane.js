@@ -27,7 +27,20 @@ async function checkServiceNowSession() {
     }
   } catch (error) {
     console.error('Session is not active, redirecting to login.');
-    redirectToLogin();
+    Office.context.ui.displayDialogAsync('https://tu-instancia.service-now.com/login.do',
+      { height: 50, width: 50 }, function (asyncResult) {
+        var dialog = asyncResult.value;
+
+        // Manejo del resultado de la autenticación
+        dialog.addEventHandler(Office.EventType.DialogMessageReceived, function (message) {
+          if (message.messageType === 'authenticationComplete') {
+            dialog.close();
+            // Cargar contenido protegido en el task pane
+
+            document.getElementById('contenido').src = locationEndpoint;
+          }
+        });
+      });
   }
 }
 function redirectToLogin() {
