@@ -28,7 +28,7 @@
   <FormSettings>
     <Form xsi:type="ItemRead">
       <DesktopSettings>
-        <SourceLocation DefaultValue="https://rodrijr.github.io/microsoft-add-in/src/taskpane/taskpane.html"/>
+        <SourceLocation DefaultValue="https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do"/>
         <RequestedHeight>450</RequestedHeight>
       </DesktopSettings>
     </Form>
@@ -96,7 +96,7 @@
       </bt:Images>
       <bt:Urls>
         <bt:Url id="Commands.Url" DefaultValue="https://rodrijr.github.io/microsoft-add-in/src/commands/commands.html"/>
-        <bt:Url id="Taskpane.Url" DefaultValue="https://rodrijr.github.io/microsoft-add-in/src/taskpane/taskpane.html"/>
+        <bt:Url id="Taskpane.Url" DefaultValue="https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do"/>
       </bt:Urls>
       <bt:ShortStrings>
         <bt:String id="GroupLabel" DefaultValue="IADB Add-in"/>
