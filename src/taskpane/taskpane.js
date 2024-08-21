@@ -40,7 +40,12 @@ async function getLocationID(locationCode) {
     el.src = 'https://iadbdev.service-now.com/x_nuvo_eam_fm_view_v2.do?app=user#?s=e2a369cd47dee5d08aba7f67536d4387&view=default&search=' + sys_id;
     console.log('JRBP -> el.src:', el.src);
     el.id = 'miIframe';
-    el.sandbox = "allow-scripts allow-same-origin allow-top-navigation-by-user-activation";
+    el.sandbox = "allow-scripts allow-forms allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-modals allow-downloads allow-storage-access-by-user-activation";
+
+    title = "Complemento de Office Locations finder"
+    allow = ""
+    el.name = "{&quot;baseFrameName&quot;:&quot;_xdm_5__8b7c90dc-80fd-0982-441d-9faa8998d12269854040_b7b7b150_1724265576652&quot;,&quot;hostInfo&quot;:&quot;Outlook|Web|16.01|es-ES|9c8bc367-191e-711c-b1d0-809b38add415|||16&quot;,&quot;xdmInfo&quot;:&quot;9edc182_813dbe25_1724265576652|8b7c90dc-80fd-0982-441d-9faa8998d122|https://outlook.office.com&quot;,&quot;flights&quot;:&quot;[\&quot;Microsoft.Office.SharedOnline.ProcessMultipleCommandsInDequeInvoker\&quot;]&quot;,&quot;disabledChangeGates&quot;:&quot;[]&quot;}"
+    el.class="AddinIframe"
     el.referrerpolicy = "strict-origin-when-cross-origin";
   //  el.setAttribute('Authorization', authToken);
     var a = document.getElementById("miIframe")?.remove();
