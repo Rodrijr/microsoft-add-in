@@ -18,7 +18,7 @@ async function authenticateWithServiceNow() {
     const response = await fetch('https://iadbdev.service-now.com/api/now/table/sys_user', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${outlookAccessToken}`,
+        'Authorization': 'Basic ' + btoa('autocad_integration' + ':' + 'AutoCadIntegration67='),
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
