@@ -4,8 +4,42 @@ const locationEndpoint = 'https://iadbdev.service-now.com/x_nuvo_eam_microsoft_a
 Office.onReady((info) => {
   if (info.host === Office.HostType.Outlook) {
     initialize();
+
+
   }
 });
+
+
+
+async function authenticateWithServiceNow() {
+  const outlookAccessToken = 'your_outlook_access_token'; // Reemplaza con tu token actual
+
+  try {
+    const response = await fetch('https://iadbdev.service-now.com/api/now/table/sys_user', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${outlookAccessToken}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        'user_name': 'autocad_integration',
+        'password': 'AutoCadIntegration67=' // O algún otro mecanismo de autenticación
+      })
+    });
+
+    const data = await response.json();
+    const serviceNowSessionToken = data.result.sys_id; // Suponiendo que el token está en el campo sys_id
+
+    // Cargar el iframe con el token de sesión
+    const iframe = document.createElement('iframe');
+    iframe.src = `https://iadbdev.service-now.com/nav_to.do?uri=x_nuvo_eam_microsoft_add_in.do&sysparm_session_id=${serviceNowSessionToken}`;
+    document.body.appendChild(iframe);
+  } catch (error) {
+    console.error('Error al autenticar con ServiceNow:', error);
+  }
+}
+
+
 
 const instance = axios.create({
   baseURL: 'https://iadbdev.service-now.com/api/',
@@ -22,8 +56,8 @@ function subjectCB(result) {
 }
 
 async function initialize() {
-  await getLocationID('NE1075');
-
+  // await getLocationID('NE1075');
+  await authenticateWithServiceNow()
 }
 
 const authToken = 'Basic ' + btoa('autocad_integration' + ':' + 'AutoCadIntegration67=');
