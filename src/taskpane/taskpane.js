@@ -15,7 +15,7 @@ async function authenticateWithServiceNow() {
   const outlookAccessToken = getUserIdentityToken(); // Reemplaza con tu token actual
 
   try {
-    const response = await fetch('now/table/x_nuvo_eam_elocation?sysparm_fields=sys_id&sysparm_limit=1&location_code=', {
+    const response = await fetch('now/table/x_nuvo_eam_elocation?sysparm_fields=sys_id&sysparm_limit=1&location_code=Unassigned-HQ', {
       method: 'GET',
       headers: {
         'Authorization': 'Basic ' + btoa('autocad_integration' + ':' + 'AutoCadIntegration67='),
