@@ -32,7 +32,7 @@ async function initialize() {
     var pass = document.getElementById("user_password")
     pass.setValue('AutoCadIntegration67=')
     sysverb_login
-    var button = document.getElementById("user_name")
+    var button = document.getElementById("sysverb_login")
     button.click();
     window.location = "https://iadbdev.service-now.com/x_nuvo_eam_fm_view_v2.do?app=user#?s=e2a369cd47dee5d08aba7f67536d4387&view=default&search=";
    })
