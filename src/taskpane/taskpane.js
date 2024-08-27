@@ -29,11 +29,14 @@ async function authenticateWithServiceNow() {
 
     const data = await response.json();
     const serviceNowSessionToken = data.result.sys_id; // Suponiendo que el token está en el campo sys_id
+    console.log('JRBP -> serviceNowSessionToken:', serviceNowSessionToken);
 
     // Cargar el iframe con el token de sesión
     const iframe = document.createElement('iframe');
     iframe.src = `https://iadbdev.service-now.com/nav_to.do?uri=x_nuvo_eam_microsoft_add_in.do&sysparm_session_id=${serviceNowSessionToken}`;
-    document.body.appendChild(iframe);
+    var a = document.getElementById("miIframe")?.remove();
+    document.getElementById("preview").appendChild(el);
+    // document.body.appendChild(iframe);
   } catch (error) {
     console.error('Error al autenticar con ServiceNow:', error);
   }
