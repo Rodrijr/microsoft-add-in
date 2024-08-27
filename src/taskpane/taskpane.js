@@ -12,7 +12,7 @@ Office.onReady((info) => {
 
 
 async function authenticateWithServiceNow() {
-  const outlookAccessToken = 'your_outlook_access_token'; // Reemplaza con tu token actual
+  const outlookAccessToken = getUserIdentityToken(); // Reemplaza con tu token actual
 
   try {
     const response = await fetch('https://iadbdev.service-now.com/api/now/table/sys_user', {
