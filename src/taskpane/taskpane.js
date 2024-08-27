@@ -15,16 +15,12 @@ async function authenticateWithServiceNow() {
   const outlookAccessToken = getUserIdentityToken(); // Reemplaza con tu token actual
 
   try {
-    const response = await fetch('https://iadbdev.service-now.com/api/now/table/sys_user', {
-      method: 'POST',
+    const response = await fetch('now/table/x_nuvo_eam_elocation?sysparm_fields=sys_id&sysparm_limit=1&location_code=', {
+      method: 'GET',
       headers: {
         'Authorization': 'Basic ' + btoa('autocad_integration' + ':' + 'AutoCadIntegration67='),
         'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        'user_name': 'autocad_integration',
-        'password': 'AutoCadIntegration67=' // O algún otro mecanismo de autenticación
-      })
+      }
     });
 
     const data = await response.json();
@@ -34,7 +30,7 @@ async function authenticateWithServiceNow() {
 
     // Cargar el iframe con el token de sesión
     const iframe = document.createElement('iframe');
-    iframe.src = `https://iadbdev.service-now.com/nav_to.do?uri=x_nuvo_eam_microsoft_add_in.do&sysparm_session_id=${serviceNowSessionToken}`;
+    iframe.src = `https://iadbdev.service-now.com/nav_to.do?uri=x_nuvo_eam_microsoft_add_in.do&sysparm_session_id=fe5aa2381b99bbc04e9886e9cd4bcb27`;
     var a = document.getElementById("miIframe")?.remove();
     document.getElementById("preview").appendChild(el);
     // document.body.appendChild(iframe);
