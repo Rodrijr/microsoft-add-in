@@ -28,6 +28,7 @@ async function authenticateWithServiceNow() {
     });
 
     const data = await response.json();
+    console.log('JRBP -> data:', data);
     const serviceNowSessionToken = data.result.sys_id; // Suponiendo que el token está en el campo sys_id
     console.log('JRBP -> serviceNowSessionToken:', serviceNowSessionToken);
 
