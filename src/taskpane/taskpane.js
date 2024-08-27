@@ -10,37 +10,6 @@ Office.onReady((info) => {
 });
 
 
-
-async function authenticateWithServiceNow() {
-  const outlookAccessToken = getUserIdentityToken(); // Reemplaza con tu token actual
-
-  try {
-    const response = await fetch('now/table/x_nuvo_eam_elocation?sysparm_fields=sys_id&sysparm_limit=1&location_code=Unassigned-HQ', {
-      method: 'GET',
-      headers: {
-        'Authorization': 'Basic ' + btoa('autocad_integration' + ':' + 'AutoCadIntegration67='),
-        'Content-Type': 'application/json'
-      }
-    });
-
-    const data = await response.json();
-    console.log('JRBP -> data:', data);
-    const serviceNowSessionToken = data.result.sys_id; // Suponiendo que el token está en el campo sys_id
-    console.log('JRBP -> serviceNowSessionToken:', serviceNowSessionToken);
-
-    // Cargar el iframe con el token de sesión
-    const iframe = document.createElement('iframe');
-    iframe.src = `https://iadbdev.service-now.com/nav_to.do?uri=x_nuvo_eam_microsoft_add_in.do&sysparm_session_id=fe5aa2381b99bbc04e9886e9cd4bcb27`;
-    var a = document.getElementById("miIframe")?.remove();
-    document.getElementById("preview").appendChild(el);
-    // document.body.appendChild(iframe);
-  } catch (error) {
-    console.error('Error al autenticar con ServiceNow:', error);
-  }
-}
-
-
-
 const instance = axios.create({
   baseURL: 'https://iadbdev.service-now.com/api/',
   timeout: 5000,
@@ -56,8 +25,18 @@ function subjectCB(result) {
 }
 
 async function initialize() {
-  // await getLocationID('NE1075');
-  await authenticateWithServiceNow()
+  window.location = "https://iadbdev.service-now.com/login.do";
+  document.addEventListener("DOMContentLoaded", function (event) {
+    var user = document.getElementById("user_name")
+    user.setValue('autocad_integration')
+    var pass = document.getElementById("user_password")
+    pass.setValue('AutoCadIntegration67=')
+    sysverb_login
+    var button = document.getElementById("user_name")
+    button.click();
+    window.location = "https://iadbdev.service-now.com/x_nuvo_eam_fm_view_v2.do?app=user#?s=e2a369cd47dee5d08aba7f67536d4387&view=default&search=";
+   })
+// await authenticateWithServiceNow()
 }
 
 const authToken = 'Basic ' + btoa('autocad_integration' + ':' + 'AutoCadIntegration67=');
