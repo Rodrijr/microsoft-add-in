@@ -25,6 +25,7 @@ function subjectCB(result) {
 }
 
 async function initialize() {
+  console.log('>>>>>>>>>>>>>>>>>>>>>>>initialize')
   const el = document.createElement('iframe');
   el.src = "https://iadbdev.service-now.com/login.do";
   el.id = 'miIframe';
@@ -37,7 +38,7 @@ async function initialize() {
   el.onload = function () {
     const iframeWindow = el.contentWindow;
     const iframeDocument = el.contentDocument || iframeWindow.document;
-
+    console.log('>>>>>>>>>>>>>>>>>>> i frame on load')
     if (iframeWindow.location.href.includes("/login.do")) {
       const user = iframeDocument.getElementById("user_name");
       user.value = 'autocad_integration';
