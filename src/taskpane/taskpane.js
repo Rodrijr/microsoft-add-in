@@ -21,19 +21,19 @@ async function initialize() {
 
     console.log('>>>>>>>>>>>>>>>>>>> i frame on load')
 
-      const user = iframeDocument.getElementById("user_name");
-      user.value = 'autocad_integration';
+    const user = document.getElementById("user_name");
+    user.value = 'autocad_integration';
 
-      const pass = iframeDocument.getElementById("user_password");
-      pass.value = 'AutoCadIntegration67=';
+    const pass = document.getElementById("user_password");
+    pass.value = 'AutoCadIntegration67=';
 
-      const button = iframeDocument.getElementById("sysverb_login");
-      button.click();
+    const button = document.getElementById("sysverb_login");
+    button.click();
 
-      iframeWindow.location.href = "https://iadbdev.service-now.com/x_nuvo_eam_fm_view_v2.do?app=user#?s=e2a369cd47dee5d08aba7f67536d4387&view=default&search=";
+    document.location.href = "https://iadbdev.service-now.com/x_nuvo_eam_fm_view_v2.do?app=user#?s=e2a369cd47dee5d08aba7f67536d4387&view=default&search=";
   };
   document.getElementById("miIframe")?.remove();
   document.getElementById("preview").appendChild(el);
 
-// await authenticateWithServiceNow()
+  // await authenticateWithServiceNow()
 }
