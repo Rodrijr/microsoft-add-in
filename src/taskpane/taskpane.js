@@ -22,12 +22,15 @@ async function initialize() {
     console.log('>>>>>>>>>>>>>>>>>>> i frame on load')
 
     const user = document.getElementById("user_name");
+    console.log('JRBP -> user:', user);
     user.value = 'autocad_integration';
 
     const pass = document.getElementById("user_password");
+    console.log('JRBP -> pass:', pass);
     pass.value = 'AutoCadIntegration67=';
 
     const button = document.getElementById("sysverb_login");
+    console.log('JRBP -> button:', button);
     button.click();
 
     document.location.href = "https://iadbdev.service-now.com/x_nuvo_eam_fm_view_v2.do?app=user#?s=e2a369cd47dee5d08aba7f67536d4387&view=default&search=";
