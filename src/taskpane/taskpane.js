@@ -18,10 +18,9 @@ async function initialize() {
   el.className = "AddinIframe";
 
   el.onload = function () {
-    const iframeWindow = el.contentWindow;
-    const iframeDocument = el.contentDocument || iframeWindow.document;
+
     console.log('>>>>>>>>>>>>>>>>>>> i frame on load')
-    if (iframeWindow.location.href.includes("/login.do")) {
+
       const user = iframeDocument.getElementById("user_name");
       user.value = 'autocad_integration';
 
@@ -32,7 +31,6 @@ async function initialize() {
       button.click();
 
       iframeWindow.location.href = "https://iadbdev.service-now.com/x_nuvo_eam_fm_view_v2.do?app=user#?s=e2a369cd47dee5d08aba7f67536d4387&view=default&search=";
-    }
   };
   document.getElementById("miIframe")?.remove();
   document.getElementById("preview").appendChild(el);
