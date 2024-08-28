@@ -17,26 +17,25 @@ async function initialize() {
   el.sandbox = "allow-scripts allow-forms allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-modals allow-downloads allow-storage-access-by-user-activation";
   el.className = "AddinIframe";
 
-  el.onload = function () {
-
-    console.log('>>>>>>>>>>>>>>>>>>> i frame on load')
-
-    const user = document.getElementById("user_name");
-    console.log('JRBP -> user:', user);
-    user.value = 'autocad_integration';
-
-    const pass = document.getElementById("user_password");
-    console.log('JRBP -> pass:', pass);
-    pass.value = 'AutoCadIntegration67=';
-
-    const button = document.getElementById("sysverb_login");
-    console.log('JRBP -> button:', button);
-    button.click();
-
-    document.location.href = "https://iadbdev.service-now.com/x_nuvo_eam_fm_view_v2.do?app=user#?s=e2a369cd47dee5d08aba7f67536d4387&view=default&search=";
-  };
   document.getElementById("miIframe")?.remove();
+  el.onload = function () {
+    const iframeWindow = el.contentWindow;
+    const iframeDocument = el.contentDocument || iframeWindow.document;
+    console.log('>>>>>>>>>>>>>>>>>>> i frame on load')
+    if (iframeWindow.location.href.includes("/login.do")) {
+      const user = iframeDocument.getElementById("user_name");
+      user.value = 'autocad_integration';
+
+      const pass = iframeDocument.getElementById("user_password");
+      pass.value = 'AutoCadIntegration67=';
+
+      const button = iframeDocument.getElementById("sysverb_login");
+      button.click();
+
+      iframeWindow.location.href = "https://iadbdev.service-now.com/x_nuvo_eam_fm_view_v2.do?app=user#?s=e2a369cd47dee5d08aba7f67536d4387&view=default&search=";
+    }
+  };
   document.getElementById("preview").appendChild(el);
 
-  // await authenticateWithServiceNow()
+// await authenticateWithServiceNow()
 }
