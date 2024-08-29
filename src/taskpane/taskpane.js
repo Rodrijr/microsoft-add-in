@@ -1,25 +1,25 @@
 /* global Office */
-const locationEndpoint = 'https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do?location=';
 const instance = axios.create({
-  baseURL: 'https://iadbdev.service-now.com',
-  timeout: 5000,
+  baseURL: 'https://iadbdev.service-now.com/api/',
+  timeout: 1000,
   headers: {
-    'Accept': '*/*',
-    'Access-Control-Allow-Origin': 'https://rodrijr.github.io/'
-  }
-});
-Office.onReady((info) => {
-  if (info.host === Office.HostType.Outlook) {
-    loginOAUTH();
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'Authorization': 'Basic ' + btoa('autocad_integration' + ':' + 'AutoCadIntegration67=')
   }
 });
 
-async function loginOAUTH() {
+async function run() {
   try {
-    var resp = await instance.post('/oauth_token.do?grant_type=password&client_id=f3600e11ee4bca94785814825f74d23a&client_secret=wUi%26mLGH0f&password=AutoCadIntegration67%3D&username=autocad_integration')
-    console.log('JRBP -> resp:', resp);
+    var { data } = await instance.get('now/table/x_nuvo_eam_elocation?sysparm_fields=sys_id&sysparm_limit=1')
+    console.log('>>>>>', data[0]);
+    if (data && data[0]) {
+      const item = Office.context.mailbox.item;
+    }
 
   } catch (error) {
-    console.log('JRBP -> error:', error);
+    console.log('error >>>>>>>>>', error);
   }
 }
+
+run();
