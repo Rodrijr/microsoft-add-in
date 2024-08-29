@@ -3,6 +3,11 @@ const locationEndpoint = 'https://iadbdev.service-now.com/x_nuvo_eam_microsoft_a
 const instance = axios.create({
   baseURL: 'https://iadbdev.service-now.com',
   timeout: 5000,
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*'
+  }
 });
 Office.onReady((info) => {
   if (info.host === Office.HostType.Outlook) {
