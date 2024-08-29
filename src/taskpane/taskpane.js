@@ -11,11 +11,15 @@ const instance = axios.create({
 
 async function run() {
   try {
-    var { data } = await instance.get('now/table/x_nuvo_eam_elocation?sysparm_fields=sys_id&sysparm_limit=1')
-    console.log('>>>>>', data[0]);
-    if (data && data[0]) {
-      const item = Office.context.mailbox.item;
-    }
+    var data = await instance.get('now/table/x_nuvo_eam_elocation?sysparm_fields=sys_id&sysparm_limit=1')
+    console.log('>>>>>', data);
+
+    var el = document.createElement("iframe");
+    el.src = 'https://iadbdev.service-now.com/x_nuvo_eam_fm_view_v2.do';
+    el.id = 'miIframe';
+    el.referrerpolicy = "strict-origin-when-cross-origin";
+    document.getElementById("miIframe")?.remove();
+    document.getElementById("preview").appendChild(el);
 
   } catch (error) {
     console.log('error >>>>>>>>>', error);
