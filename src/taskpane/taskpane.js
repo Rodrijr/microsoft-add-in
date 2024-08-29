@@ -5,7 +5,7 @@ const instance = axios.create({
   timeout: 5000,
   headers: {
     'Accept': '*/*',
-    'Access-Control-Allow-Origin': '*'
+    'Access-Control-Allow-Origin': 'https://rodrijr.github.io/'
   }
 });
 Office.onReady((info) => {
