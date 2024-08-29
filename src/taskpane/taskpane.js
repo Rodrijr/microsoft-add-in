@@ -4,8 +4,7 @@ const instance = axios.create({
   baseURL: 'https://iadbdev.service-now.com',
   timeout: 5000,
   headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json',
+    'Accept': '*/*',
     'Access-Control-Allow-Origin': '*'
   }
 });
