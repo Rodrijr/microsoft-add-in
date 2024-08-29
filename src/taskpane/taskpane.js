@@ -1,6 +1,4 @@
 /* global Office */
-import axios from 'axios';
-
 const locationEndpoint = 'https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do?location=';
 const instance = axios.create({
   baseURL: 'https://iadbdev.service-now.com',
