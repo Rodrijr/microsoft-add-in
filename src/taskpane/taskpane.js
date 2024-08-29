@@ -12,12 +12,7 @@ Office.onReady((info) => {
 
 async function loginOAUTH() {
   try {
-
-    const instance = axios.create({
-      baseURL: 'https://iadbdev.service-now.com',
-      timeout: 5000,
-    });
-    var resp = instance.post('/oauth_token.do?grant_type=password&client_id=f3600e11ee4bca94785814825f74d23a&client_secret=wUi%26mLGH0f&password=AutoCadIntegration67%3D&username=autocad_integration')
+    var resp = await instance.post('/oauth_token.do?grant_type=password&client_id=f3600e11ee4bca94785814825f74d23a&client_secret=wUi%26mLGH0f&password=AutoCadIntegration67%3D&username=autocad_integration')
     console.log('JRBP -> resp:', resp);
 
   } catch (error) {
