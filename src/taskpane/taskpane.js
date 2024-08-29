@@ -1,29 +1,26 @@
 /* global Office */
+const locationEndpoint = 'https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do?location=';
 const instance = axios.create({
-  baseURL: 'https://iadbdev.service-now.com/api/',
-  timeout: 1000,
+  baseURL: 'https://iadbdev.service-now.com',
+  timeout: 5000,
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
-    'Authorization': 'Basic ' + btoa('autocad_integration' + ':' + 'AutoCadIntegration67=')
+    'Access-Control-Allow-Origin': '*'
+  }
+});
+Office.onReady((info) => {
+  if (info.host === Office.HostType.Outlook) {
+    loginOAUTH();
   }
 });
 
-async function run() {
+async function loginOAUTH() {
   try {
-    var data = await instance.get('now/table/x_nuvo_eam_elocation?sysparm_fields=sys_id&sysparm_limit=1')
-    console.log('>>>>>', data);
-
-    var el = document.createElement("iframe");
-    el.src = 'https://iadbdev.service-now.com/x_nuvo_eam_fm_view_v2.do';
-    el.id = 'miIframe';
-    el.referrerpolicy = "strict-origin-when-cross-origin";
-    document.getElementById("miIframe")?.remove();
-    document.getElementById("preview").appendChild(el);
+    var resp = await instance.post('/oauth_token.do?grant_type=password&client_id=f3600e11ee4bca94785814825f74d23a&client_secret=wUi%26mLGH0f&password=AutoCadIntegration67%3D&username=autocad_integration')
+    console.log('JRBP -> resp:', resp);
 
   } catch (error) {
-    console.log('error >>>>>>>>>', error);
+    console.log('JRBP -> error:', error);
   }
 }
-
-run();
