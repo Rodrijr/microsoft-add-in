@@ -11,7 +11,7 @@ const instance = axios.create({
 });
 Office.onReady((info) => {
   if (info.host === Office.HostType.Outlook) {
-    // loginOAUTH();
+    loginOAUTH()
   }
 });
 
@@ -24,6 +24,7 @@ function redirectToPage() {
 
 function onloadHandler() {
 
+  console.log('1>>>>>>>>>>>>>>>>>>>>>>>>>>>> LOGUEADO!!!    JRBP -> location:', location);
   fetch("https://iadbdev.service-now.com/login.do", {
     "headers": {
       "content-type": "application/x-www-form-urlencoded",
