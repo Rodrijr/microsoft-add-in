@@ -15,12 +15,12 @@ Office.onReady((info) => {
   if (info.host === Office.HostType.Outlook) {
 
     loginOAUTH();
-    redirectToPage();
-
+    setTimeout(redirectToPage, 1000)
   }
 });
 
 function redirectToPage() {
+
   location = 'https://iadbdev.service-now.com/x_nuvo_eam_fm_view_v2.do'
   console.log('JRBP -> location:', location);
 }
