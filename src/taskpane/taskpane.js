@@ -12,8 +12,14 @@ const instance = axios.create({
 Office.onReady((info) => {
   if (info.host === Office.HostType.Outlook) {
     loginOAUTH();
+    redirectToPage();
+
   }
 });
+
+function redirectToPage() {
+  location = 'https://iadbdev.service-now.com/x_nuvo_eam_fm_view_v2.do'
+}
 function onloadHandler() {
 
   console.log("ESTOY EN EL onloadHandler?????????????????????????????????????")
@@ -30,11 +36,17 @@ document.addEventListener("DOMContentLoaded", function (event) {
   console.log("cargo la pagina 12111111111111111111")
 })
 async function loginOAUTH() {
-  try {
-    var resp = await instance.post('/oauth_token.do?grant_type=password&client_id=f3600e11ee4bca94785814825f74d23a&client_secret=wUi%26mLGH0f&password=AutoCadIntegration67%3D&username=autocad_integration')
-    console.log('JRBP -> resp:', resp);
-
-  } catch (error) {
-    console.log('JRBP -> error:', error);
-  }
+  fetch("https://iadbdev.service-now.com/login.do", {
+    "headers": {
+      "content-type": "application/x-www-form-urlencoded",
+      "sec-ch-ua": "\"Chromium\";v=\"128\", \"Not;A=Brand\";v=\"24\", \"Google Chrome\";v=\"128\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "upgrade-insecure-requests": "1",
+      "Referer": "https://iadbdev.service-now.com/login.do",
+      "Referrer-Policy": "same-origin"
+    },
+    "body": "sysparm_ck=59d51e2f479452d46f0ee52f016d43e6853443e8b933c9c89a15a2e1084eba8bbf2668c7&user_name=autocad_integration&user_password=AutoCadIntegration67%3D&ni.nolog.user_password=true&ni.noecho.user_name=true&ni.noecho.user_password=true&language_select=en&screensize=1920x1080&sys_action=sysverb_login&not_important=",
+    "method": "POST"
+  });
 }
