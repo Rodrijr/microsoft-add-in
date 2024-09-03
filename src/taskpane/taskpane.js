@@ -17,12 +17,16 @@ Office.onReady((info) => {
 function onloadHandler() {
 
   console.log("ESTOY EN EL onloadHandler?????????????????????????????????????")
-  var a = document.getElementById('user_name')
-  console.log(a)
+  document.addEventListener("DOMContentLoaded", function (event) {
+
+    console.log("cargo la pagina 2222222222222222222")
+    var a = document.getElementById('user_name')
+    console.log(a)
+  })
 }
 document.addEventListener("DOMContentLoaded", function (event) {
 
-  console.log("cargo la pagina")
+  console.log("cargo la pagina 12111111111111111111")
 })
 async function loginOAUTH() {
   try {
