@@ -32,6 +32,7 @@ async function onloadHandler() {
   } catch (error) {
     console.log('JRBP -> error:', error);
   }
+}
 /*
   function newFunction() {
     console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>> REDIRECT TO: ' + 'https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do?location=NE1081');
