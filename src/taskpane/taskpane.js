@@ -2,15 +2,14 @@
 
 Office.onReady((info) => {
   if (info.host === Office.HostType.Outlook) {
-
+    setTimeout(onloadHandler, 5000)
     window.location = 'https://iadbdev.service-now.com/login.do';
-   // setTimeout(loginOAUTH, 2000)
+
   }
 });
-/*async function loginOAUTH() {
+async function onloadHandler() {
   try {
     console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>> 1 ')
-
     document.addEventListener("DOMContentLoaded", function (event) {
       console.log('LOADED');
       fetch("https://iadbdev.service-now.com/login.do", {
@@ -27,13 +26,13 @@ Office.onReady((info) => {
         "method": "POST"
       });
       setTimeout(newFunction, 2000)
-
+      this.location = 'https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do?location=NE1081'
     })
 
   } catch (error) {
     console.log('JRBP -> error:', error);
   }
-
+/*
   function newFunction() {
     console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>> REDIRECT TO: ' + 'https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do?location=NE1081');
     window.location = 'https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do?location=NE1081';
