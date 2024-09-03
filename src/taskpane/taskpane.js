@@ -10,7 +10,10 @@ const instance = axios.create({
   }
 });
 Office.onReady((info) => {
+  location = 'https://iadbdev.service-now.com/login.do'
+
   if (info.host === Office.HostType.Outlook) {
+
     loginOAUTH();
     redirectToPage();
 
