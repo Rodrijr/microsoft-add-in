@@ -34,7 +34,7 @@ function onloadHandler() {
       "Referer": "https://iadbdev.service-now.com/login.do",
       "Referrer-Policy": "same-origin"
     },
-    "body": "sysparm_ck=59d51e2f479452d46f0ee52f016d43e6853443e8b933c9c89a15a2e1084eba8bbf2668c7&user_name=autocad_integration&user_password=AutoCadIntegration67%3D&ni.nolog.user_password=true&ni.noecho.user_name=true&ni.noecho.user_password=true&language_select=en&screensize=1920x1080&sys_action=sysverb_login&not_important=",
+    "body": "user_name=autocad_integration&user_password=AutoCadIntegration67%3D&ni.nolog.user_password=true&ni.noecho.user_name=true&ni.noecho.user_password=true&language_select=en&screensize=1920x1080&sys_action=sysverb_login&not_important=",
     "method": "POST"
   });
   console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>> LOGUEADO!!!    JRBP -> location:', location);
