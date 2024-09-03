@@ -11,13 +11,15 @@ const instance = axios.create({
 });
 Office.onReady((info) => {
   if (info.host === Office.HostType.Outlook) {
-    loginOAUTH()
+
+    window.location = 'https://iadbdev.service-now.com/login.do';
+    setTimeout(loginOAUTH, 2000)
   }
 });
 async function loginOAUTH() {
   try {
     console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>> 1 ')
-    window.location = 'https://iadbdev.service-now.com/login.do';
+
     document.addEventListener("DOMContentLoaded", function (event) {
       console.log('LOADED');
       fetch("https://iadbdev.service-now.com/login.do", {
@@ -33,11 +35,16 @@ async function loginOAUTH() {
         "body": "sysparm_ck=59d51e2f479452d46f0ee52f016d43e6853443e8b933c9c89a15a2e1084eba8bbf2668c7&user_name=autocad_integration&user_password=AutoCadIntegration67%3D&ni.nolog.user_password=true&ni.noecho.user_name=true&ni.noecho.user_password=true&language_select=en&screensize=1920x1080&sys_action=sysverb_login&not_important=",
         "method": "POST"
       });
-      console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>> REDIRECT TO: ' + 'https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do?location=NE1081')
-      window.location = 'https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do?location=NE1081'
+      setTimeout(newFunction, 2000)
+
     })
 
   } catch (error) {
     console.log('JRBP -> error:', error);
+  }
+
+  function newFunction() {
+    console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>> REDIRECT TO: ' + 'https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do?location=NE1081');
+    window.location = 'https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do?location=NE1081';
   }
 }
