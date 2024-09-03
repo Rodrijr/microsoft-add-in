@@ -17,10 +17,10 @@ Office.onReady((info) => {
 function onloadHandler() {
 
   console.log("ESTOY EN EL onloadHandler?????????????????????????????????????")
-  document.addEventListener("DOMContentLoaded", function (event) {
+  this.addEventListener("DOMContentLoaded", function (event) {
 
     console.log("cargo la pagina 2222222222222222222")
-    var a = document.getElementById('user_name')
+    var a = this.getElementById('user_name')
     console.log(a)
   })
 }
