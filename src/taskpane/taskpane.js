@@ -44,7 +44,7 @@ function onloadHandler() {
 }
 async function loginOAUTH() {
   try {
-    onsole.log('1loginOAUTHloginOAUTHloginOAUTHloginOAUTHloginOAUTHloginOAUTH loginOAUTH!!!    JRBP -> location:');
+    console.log('1loginOAUTHloginOAUTHloginOAUTHloginOAUTHloginOAUTHloginOAUTH loginOAUTH!!!    JRBP -> location:');
     fetch("https://iadbdev.service-now.com/login.do", {
       "headers": {
         "content-type": "application/x-www-form-urlencoded",
