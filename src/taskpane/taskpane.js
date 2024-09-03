@@ -1,22 +1,13 @@
 /* global Office */
-const locationEndpoint = 'https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do?location=';
-const instance = axios.create({
-  baseURL: 'https://iadbdev.service-now.com',
-  timeout: 5000,
-  headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json',
-    'Authorization': 'Basic ' + btoa('autocad_integration' + ':' + 'AutoCadIntegration67=')
-  }
-});
+
 Office.onReady((info) => {
   if (info.host === Office.HostType.Outlook) {
 
     window.location = 'https://iadbdev.service-now.com/login.do';
-    setTimeout(loginOAUTH, 2000)
+   // setTimeout(loginOAUTH, 2000)
   }
 });
-async function loginOAUTH() {
+/*async function loginOAUTH() {
   try {
     console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>> 1 ')
 
@@ -48,3 +39,4 @@ async function loginOAUTH() {
     window.location = 'https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do?location=NE1081';
   }
 }
+*/
