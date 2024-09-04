@@ -2,6 +2,7 @@
 
 window.onload = function () {
   // Notifica al taskpane que el iframe se ha cargado
+  alert('LOADED')
   window.parent.postMessage('iframe_loaded', '*');
 };
 
@@ -23,13 +24,13 @@ window.addEventListener('message', async function (event) {
         "method": "POST"
       });
 
-      console.log('Fetch completado:', resp);
+      alert.log('Fetch completado:', resp);
 
       // Redirigir a otra página dentro del iframe
       window.location.href = 'https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do?location=NE1081';
 
     } catch (error) {
-      console.log('Error en el fetch:', error);
+      alert.log('Error en el fetch:', error);
     }
   }
 });
