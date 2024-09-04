@@ -13,7 +13,7 @@ Office.onReady((info) => {
   }
 });
 
-window.addEventListener('message', async function (event) {
+window.addEventListener('start_fetch', async function (event) {
   if (event.data === 'start_fetch') {
     try {
       console.log('Iniciando fetch dentro del iframe...');
