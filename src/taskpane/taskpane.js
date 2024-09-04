@@ -2,7 +2,7 @@
 
 Office.onReady((info) => {
   if (info.host === Office.HostType.Outlook) {
-
+/*
     var count = 0;
     var fetchFunction = async function () {
       console.log('HACER FETCH')
@@ -35,7 +35,7 @@ Office.onReady((info) => {
     setTimeout(function () {
       console.log('AAAAAAAAAAAAAAAAAA')
       location ='https://iadbdev.service-now.com/login.do'
-    }, 1500)
+    }, 1500)*/
   }
 });
 
