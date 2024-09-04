@@ -40,7 +40,7 @@
         // Espera el mensaje del iframe una vez que se haya cargado la página
         window.addEventListener('message', function (event) {
             if (event.data === 'iframe_loaded') {
-                alert('iframe_loaded')
+                console.log('>>>>>>>>>>>>>>>>>>>>>>>>iframe_loaded')
                 // Envía un mensaje al iframe para iniciar el fetch
                 const iframe = document.getElementById('miIframe');
                 iframe.contentWindow.postMessage('start_fetch', '*');

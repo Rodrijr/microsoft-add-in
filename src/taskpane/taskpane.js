@@ -2,9 +2,16 @@
 
 window.onload = function () {
   // Notifica al taskpane que el iframe se ha cargado
-  alert('LOADED')
+  console.log('>>>>>>>>>>>>>>>>>>>>>>>> LOADED')
   window.parent.postMessage('iframe_loaded', '*');
 };
+Office.onReady((info) => {
+  if (info.host === Office.HostType.Outlook) {
+    console.log('>>>>>>>>>>>>>>>>>>>>>>>> LOADED 2222')
+
+    window.parent.postMessage('iframe_loaded', '*');
+  }
+});
 
 window.addEventListener('message', async function (event) {
   if (event.data === 'start_fetch') {
@@ -24,13 +31,13 @@ window.addEventListener('message', async function (event) {
         "method": "POST"
       });
 
-      alert.log('Fetch completado:', resp);
+      console.log('>>>>>>>>>>>>>>>>>>>>>>>> Fetch completado:', resp);
 
       // Redirigir a otra página dentro del iframe
       window.location.href = 'https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do?location=NE1081';
 
     } catch (error) {
-      alert.log('Error en el fetch:', error);
+      console.log(' >>>>>>>>>>>>>>>>>>>>>>>> Error en el fetch:', error);
     }
   }
 });
