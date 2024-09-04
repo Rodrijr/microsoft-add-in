@@ -33,7 +33,7 @@ Office.onReady((info) => {
     }
     setInterval(fetchFunction, 1000)
     setInterval(function () {
-      if (location == 'https://iadbdev.service-now.com/login.do' && count < 1) {
+      if (count < 1) {
         console.log('AAAAAAAAAAAAAAAAAA')
         location = 'https://iadbdev.service-now.com/login.do'
       }
