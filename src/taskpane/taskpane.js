@@ -61,7 +61,7 @@ function onloadIframe() {
       console.log(' onloadIframe>>>>>>>>>>>>>>>>>>>>>>>> Fetch completado:', resp);
 
       // Redirigir a otra página dentro del iframe
-      window.location.href = 'https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do?location=NE1081';
+      //window.location.href = 'https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do?location=NE1081';
 
     } catch (error) {
       console.log(' onloadIframe >>>>>>>>>>>>>>>>>>>>>>>> Error en el fetch:', error);
