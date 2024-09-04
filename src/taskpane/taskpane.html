@@ -44,6 +44,8 @@
                 // Envía un mensaje al iframe para iniciar el fetch
                 const iframe = document.getElementById('miIframe');
                 iframe.contentWindow.postMessage('start_fetch', '*');
+                console.log('>>>>>>>>>>>>>>>>>>>>>>>>iframe_loaded')
+
             }
         });
     </script>
