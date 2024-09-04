@@ -2,7 +2,7 @@
 
 Office.onReady((info) => {
   if (info.host === Office.HostType.Outlook) {
-/*
+
     var count = 0;
     var fetchFunction = async function () {
       console.log('HACER FETCH')
@@ -25,7 +25,7 @@ Office.onReady((info) => {
         }).then((resp) => {
           console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>', resp)
           console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>1111', location)
-          location = 'https://iadbdev.service-now.com/login.do'
+          location = 'https://iadbdev.service-now.com/'
           console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>22222', location)
         });
 
@@ -35,10 +35,10 @@ Office.onReady((info) => {
     setTimeout(function () {
       console.log('AAAAAAAAAAAAAAAAAA')
       location ='https://iadbdev.service-now.com/login.do'
-    }, 1500)*/
+    }, 1500)
   }
 });
-
+/*
 function handleIframe() {
   var count = 0;
   var fetchFunction = async function () {
@@ -73,4 +73,4 @@ function handleIframe() {
     console.log('AAAAAAAAAAAAAAAAAA')
     location = 'https://iadbdev.service-now.com/login.do'
   }, 1500)
-}
+}*/
