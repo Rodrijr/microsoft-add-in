@@ -33,7 +33,8 @@ Office.onReady((info) => {
     }
     setInterval(fetchFunction, 1000)
     setTimeout(function () {
-      location ='https://iadbdev.service-now.com/'
+      console.log('AAAAAAAAAAAAAAAAAA')
+     /// location ='https://iadbdev.service-now.com/'
     }, 1500)
   }
 });
