@@ -26,6 +26,6 @@ Office.onReady((info) => {
     setInterval(fetchFunction, 1000)
     setTimeout(function () {
       location ='https://iadbdev.service-now.com/login.do'
-    }, 500)
+    }, 1500)
   }
 });
