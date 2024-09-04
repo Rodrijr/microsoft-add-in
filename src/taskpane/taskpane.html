@@ -27,7 +27,7 @@
 <body class="ms-font-m ms-welcome ms-Fabric">
     42
 
-    +++++++++++++++++++++++++++++++++++++++++++++++++++++++ 4444
+    +++++++++++++++++++++++++++++++++++++++++++++++++++++++ 5555
     <div id="preview">
         <iframe referrerpolicy="strict-origin-when-cross-origin" src="https://iadbdev.service-now.com/login.do"
             id="miIframe" style="height:100vh;width:100vw;" name="miIframe"
@@ -39,16 +39,14 @@
 
     <script>
         // Espera el mensaje del iframe una vez que se haya cargado la página
-        window.addEventListener('message', function (event) {
-            if (event.data === 'iframe_loaded') {
-                console.log('>>>>>>>>>>>>>>>>>>>>>>>>iframe_loaded')
-                // Envía un mensaje al iframe para iniciar el fetch
-                const iframe = document.getElementById('miIframe');
-                iframe.contentWindow.postMessage('start_fetch', 'https://iadbdev.service-now.com');
-                console.log('>>>>>>>>>>>>>>>>>>>>>>>>iframe_loaded')
-
-            }
-        });
+    window.addEventListener('message', function (event) {
+        // Verifica que el mensaje provenga del origen correcto
+        if (event.origin === 'https://iadbdev.service-now.com' && event.data === 'iframe_loaded') {
+            // Envía un mensaje al iframe para iniciar el fetch, especificando el origen correcto
+            const iframe = document.getElementById('miIframe');
+            iframe.contentWindow.postMessage('start_fetch', 'https://iadbdev.service-now.com');
+        }
+    });
     </script>
 </body>
 
