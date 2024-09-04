@@ -44,7 +44,7 @@
                 console.log('>>>>>>>>>>>>>>>>>>>>>>>>iframe_loaded')
                 // Envía un mensaje al iframe para iniciar el fetch
                 const iframe = document.getElementById('miIframe');
-                iframe.contentWindow.postMessage('start_fetch', '*');
+                iframe.contentWindow.postMessage('start_fetch', 'https://iadbdev.service-now.com');
                 console.log('>>>>>>>>>>>>>>>>>>>>>>>>iframe_loaded')
 
             }
