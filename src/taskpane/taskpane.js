@@ -1,10 +1,12 @@
 Office.onReady((info) => {
   if (info.host === Office.HostType.Outlook) {
-    setInterval(fetchFunction, 1000)
+
     var count = 0;
     var fetchFunction = async function () {
-      if (location == 'https://iadbdev.service-now.com/login.do' && count < 1) {
-        console.log('HACER FETCH')
+      console.log('HACER FETCH')
+
+      if (location == 'https://iadbdev.service-now.com/login.do' && count < 5) {
+        console.log('HACER FETCH 1')
         count++;
         var resp = await fetch("https://iadbdev.service-now.com/login.do", {
           "headers": {
@@ -21,8 +23,9 @@ Office.onReady((info) => {
         });
       }
     }
+    setInterval(fetchFunction, 1000)
     setTimeout(function () {
-      location == 'https://iadbdev.service-now.com/login.do'
+      location ='https://iadbdev.service-now.com/login.do'
     }, 500)
   }
 });
