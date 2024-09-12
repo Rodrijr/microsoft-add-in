@@ -40,7 +40,7 @@ function action(event) {
     subject1 = getLocationCode(item.subject) || subject1;
 
   }
-  Office.context.ui.displayDialogAsync('https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do?location=' + subject1,
+  Office.context.ui.displayDialogAsync('https://rodrijr.github.io/microsoft-add-in/src/taskpane/taskpane.html',
     { height: 45, width: 55 },
     function (asyncResult) {
       if (asyncResult.status === Office.AsyncResultStatus.Failed) {
