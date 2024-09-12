@@ -1,119 +1,81 @@
+import { createNestablePublicClientApplication } from "@azure/msal-browser";
 
-var clientID = "f5721a40-33b8-4b2b-8470-44db5b7813fa"// Obtener el objeto Office.js
-Office.onReady(function () {
-  console.log('Office.js cargado');
+let pca = undefined;
+Office.onReady(async (info) => {
+  if (info.host) {
+    /* document.getElementById("sideload-msg").style.display = "none";
+     document.getElementById("app-body").style.display = "flex";
+     document.getElementById("run").onclick = run;
+ */
+    // Initialize the public client application
+    try {
 
-  // Agregar evento de inicio de sesión
-  Office.context.ui.messageParent({
-    action: 'login',
-    data: {
-      title: 'Iniciar sesión en ServiceNow',
-      description: 'Por favor, inicia sesión en ServiceNow para continuar.'
-    }
-  });
-
-  // Evento de inicio de sesión
-  Office.context.ui.addHandler('login', function (event) {
-    console.log('Evento login detectado');
-
-    // Verificar si el usuario está autenticado en ServiceNow
-    if (Office.context.authenticatedUser.getDisplayName()) {
-      console.log('Usuario autenticado: ' + Office.context.authenticatedUser.getDisplayName());
-
-      // Mostrar un mensaje de bienvenida al usuario
-      Office.context.ui.messageParent({
-        action: 'welcome',
-        data: {
-          title: 'Bienvenido, ' + Office.context.authenticatedUser.getDisplayName(),
-          description: 'Por favor, selecciona una acción para continuar.'
-        }
+      pca = await createNestablePublicClientApplication({
+        auth: {
+          clientId: "f5721a40-33b8-4b2b-8470-44db5b7813fa",
+          authority: "https://login.microsoftonline.com/9dfb1a05-5f1d-449a-8960-62abcb479e7d"
+        },
       });
-
-      // Agregar evento de selección de acción
-      Office.context.ui.addHandler('actionSelected', function (event) {
-        console.log('Evento actionSelected detectado');
-
-        // Obtener la acción seleccionada por el usuario
-        var action = event.data.action;
-
-        // Realizar la acción seleccionada (por ejemplo, llamar a una API ServiceNow)
-        switch (action) {
-          case 'mostrarInformacion':
-            mostrarInformacion();
-            break;
-          default:
-            console.log('Acción no reconocida');
-        }
-      });
-    } else {
-      console.log('Usuario no autenticado');
+    } catch (e) {
+      console.log('JRBP -> e:', e);
     }
-  });
+    run();
+  }
+});
 
-  // Función para mostrar información sobre el usuario
-  function mostrarInformacion() {
-    Office.context.ui.messageParent({
-      action: 'mostrarInformacion',
-      data: {
-        title: 'Información del usuario',
-        description: 'Nombre: ' + Office.context.authenticatedUser.getDisplayName()
-      }
-    });
+async function run() {
+  // Specify minimum scopes needed for the access token.
+  const tokenRequest = {
+    // scopes: ["Files.Read", "User.Read", "openid", "profile"],
+    scopes: [],
+  };
+  let accessToken = null;
+
+  try {
+    console.log("Trying to acquire token silently...");
+    const userAccount = await pca.acquireTokenSilent(tokenRequest);
+    console.log("Acquired token silently.");
+    accessToken = userAccount.accessToken;
+  } catch (error) {
+    console.log(`Unable to acquire token silently: ${error}`);
   }
 
-  // Agregar evento de inicio de sesión con ServiceNow
-  document.getElementById('miIframe').addEventListener('load', function () {
-    console.log('iFrame cargado');
+  if (accessToken === null) {
+    // Acquire token silent failure. Send an interactive request via popup.
+    try {
+      console.log("Trying to acquire token interactively...");
+      const userAccount = await pca.acquireTokenPopup(tokenRequest);
+      console.log("Acquired token interactively.");
+      accessToken = userAccount.accessToken;
+    } catch (popupError) {
+      // Acquire token interactive failure.
+      console.log(`Unable to acquire token interactively: ${popupError}`);
+    }
+  }
 
-    // Obtener el objeto del iFrame (ServiceNow)
-    var iframe = document.getElementById('miIframe');
-    var win = iframe.contentWindow;
+  // Call the Microsoft Graph API with the access token.
+  const response = await fetch(
+    `https://iadbdev.service-now.com/login.do`,
+    {
+      headers: { Authorization: accessToken },
+    }
+  );
+  console.log('responseeeeeeeeeeeeeee', response)
+  /*if (response.ok) {
+    // Write file names to the console.
+    const data = await response.json();
+    const names = data.value.map((item) => item.name);
 
-    // Agregar evento de inicio de sesión con ServiceNow
-    win.addEventListener('message', function (event) {
-      console.log('Mensaje recibido desde ServiceNow');
+    // Be sure the taskpane.html has an element with Id = item-subject.
+    const label = document.getElementById("item-subject");
 
-      // Verificar si el mensaje es un evento de inicio de sesión exitoso
-      if (event.data.type === 'loginSuccess') {
-        console.log('Inicio de sesión en ServiceNow exitoso');
+    // Write file names to task pane and the console.
+    const nameText = names.join(", ");
+    if (label) label.textContent = nameText;
+    console.log(nameText);
+  } else {
+    const errorText = await response.text();
+    console.error("Microsoft Graph call failed - error text: " + errorText);
+  }*/
 
-        // Mostrar un mensaje de bienvenida al usuario
-        Office.context.ui.messageParent({
-          action: 'welcome',
-          data: {
-            title: 'Bienvenido, ' + event.data.username,
-            description: 'Por favor, selecciona una acción para continuar.'
-          }
-        });
-
-        // Agregar evento de selección de acción
-        Office.context.ui.addHandler('actionSelected', function (event) {
-          console.log('Evento actionSelected detectado');
-
-          // Obtener la acción seleccionada por el usuario
-          var action = event.data.action;
-
-          // Realizar la acción seleccionada (por ejemplo, llamar a una API ServiceNow)
-          switch (action) {
-            case 'mostrarInformacion':
-              mostrarInformacion();
-              break;
-            default:
-              console.log('Acción no reconocida');
-          }
-        });
-      } else if (event.data.type === 'loginError') {
-        console.log('Inicio de sesión en ServiceNow fallido');
-
-        // Mostrar un mensaje de error al usuario
-        Office.context.ui.messageParent({
-          action: 'error',
-          data: {
-            title: 'Error al iniciar sesión en ServiceNow',
-            description: event.data.errorMessage
-          }
-        });
-      }
-    });
-  });
-});
+}
