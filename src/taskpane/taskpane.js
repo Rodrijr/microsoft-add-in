@@ -1,4 +1,3 @@
-import { createNestablePublicClientApplication } from "@azure/msal-browser";
 
 let pca = undefined;
 Office.onReady(async (info) => {
