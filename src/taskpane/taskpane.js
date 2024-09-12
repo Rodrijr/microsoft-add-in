@@ -9,7 +9,7 @@ Office.onReady(async (info) => {
     // Initialize the public client application
     try {
 
-      pca = await createNestablePublicClientApplication({
+      pca = new msal.PublicClientApplication({
         auth: {
           clientId: "f572234a40-33b8-4b2b-8470-44db5b7813fb",
           authority: "https://login.microsoftonline.com/9dfb1a05-5f1d-449a-8960-62abcb479e7d"
