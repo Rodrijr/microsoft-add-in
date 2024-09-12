@@ -40,13 +40,16 @@ function action(event) {
     subject1 = getLocationCode(item.subject) || subject1;
 
   }
+
   Office.context.ui.displayDialogAsync('https://rodrijr.github.io/microsoft-add-in/src/taskpane/taskpane.html',
     { height: 45, width: 55 },
     function (asyncResult) {
       if (asyncResult.status === Office.AsyncResultStatus.Failed) {
-        // Show an error message
+
+
         console.log('Failed to open dialog: ' + asyncResult.error.message);
       } else {
+
         console.log('JRBP -> asyncResult:', asyncResult);
         var dialog = asyncResult.value;
         dialog.addEventHandler(Office.EventType.DialogMessageReceived, function (args) {
@@ -54,6 +57,7 @@ function action(event) {
         });
         dialog.addEventHandler(Office.EventType.DialogEventReceived, function (args) {
           console.log('Dialog closed: ' + args);
+
 
         });
       }
