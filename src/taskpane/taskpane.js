@@ -13,8 +13,8 @@ Office.onReady(async (info) => {
         auth: {
           // clientId: "f572234a40-33b8-4b2b-8470-44db5b7813fb",
 
-          clientId: "f5721a48-33b8-4b2b-8478-44db5b7813fa",
-          //clientId: "2c88968e-342a-4641-82fc-bee96c8667f8",
+          // clientId: "f5721a48-33b8-4b2b-8478-44db5b7813fa",
+          clientId: "2c88968e-342a-4641-82fc-bee96c8667f8",
 
           authority: "https://login.microsoftonline.com/9dfb1a05-5f1d-449a-8960-62abcb479e7d"
         },
