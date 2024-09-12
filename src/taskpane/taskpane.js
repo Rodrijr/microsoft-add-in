@@ -1,78 +1,119 @@
 
+var clientID = "f5721a40-33b8-4b2b-8470-44db5b7813fa"// Obtener el objeto Office.js
+Office.onReady(function () {
+  console.log('Office.js cargado');
 
-Office.onReady((info) => {
-  if (info.host === Office.HostType.Outlook) {
-
-    var count = 0;
-    var fetchFunction = async function () {
-      console.log('HACER FETCH')
-
-      if (location == 'https://iadbdev.service-now.com/login.do' && count < 1) {
-        console.log('HACER FETCH 1')
-        count++;
-        fetch("https://iadbdev.service-now.com/login.do", {
-          "headers": {
-            "content-type": "application/x-www-form-urlencoded",
-            "sec-ch-ua": "\"Chromium\";v=\"128\", \"Not;A=Brand\";v=\"24\", \"Google Chrome\";v=\"128\"",
-            "sec-ch-ua-mobile": "?0",
-            "sec-ch-ua-platform": "\"Windows\"",
-            "upgrade-insecure-requests": "1",
-            "Referer": "https://rodrijr.github.io",
-            "Referrer-Policy": "same-origin"
-          },
-          "body": "sysparm_ck=59d51e2f479452d46f0ee52f016d43e6853443e8b933c9c89a15a2e1084eba8bbf2668c7&user_name=autocad_integration&user_password=AutoCadIntegration67%3D&ni.nolog.user_password=true&ni.noecho.user_name=true&ni.noecho.user_password=true&language_select=en&screensize=1920x1080&sys_action=sysverb_login&not_important=",
-          "method": "POST"
-        }).then((resp) => {
-          console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>', resp)
-          console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>1111', location)
-          location = 'https://iadbdev.service-now.com/'
-          console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>22222', location)
-        });
-
-      }
+  // Agregar evento de inicio de sesión
+  Office.context.ui.messageParent({
+    action: 'login',
+    data: {
+      title: 'Iniciar sesión en ServiceNow',
+      description: 'Por favor, inicia sesión en ServiceNow para continuar.'
     }
-    setInterval(fetchFunction, 1000)
-    setInterval(function () {
-      if (count < 1) {
-        console.log('AAAAAAAAAAAAAAAAAA')
-        location = 'https://iadbdev.service-now.com/login.do'
-      }
-    }, 1500)
-  }
-});
-/*
-function handleIframe() {
-  var count = 0;
-  var fetchFunction = async function () {
-    console.log('HACER FETCH')
+  });
 
-    if (location == 'https://iadbdev.service-now.com/login.do' && count < 1) {
-      console.log('HACER FETCH 1')
-      count++;
-      fetch("https://iadbdev.service-now.com/login.do", {
-        "headers": {
-          "content-type": "application/x-www-form-urlencoded",
-          "sec-ch-ua": "\"Chromium\";v=\"128\", \"Not;A=Brand\";v=\"24\", \"Google Chrome\";v=\"128\"",
-          "sec-ch-ua-mobile": "?0",
-          "sec-ch-ua-platform": "\"Windows\"",
-          "upgrade-insecure-requests": "1",
-          "Referer": "https://rodrijr.github.io",
-          "Referrer-Policy": "same-origin"
-        },
-        "body": "sysparm_ck=59d51e2f479452d46f0ee52f016d43e6853443e8b933c9c89a15a2e1084eba8bbf2668c7&user_name=autocad_integration&user_password=AutoCadIntegration67%3D&ni.nolog.user_password=true&ni.noecho.user_name=true&ni.noecho.user_password=true&language_select=en&screensize=1920x1080&sys_action=sysverb_login&not_important=",
-        "method": "POST"
-      }).then((resp) => {
-        console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>', resp)
-        console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>1111', location)
-        location = 'https://iadbdev.service-now.com/login.do'
-        console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>22222', location)
+  // Evento de inicio de sesión
+  Office.context.ui.addHandler('login', function (event) {
+    console.log('Evento login detectado');
+
+    // Verificar si el usuario está autenticado en ServiceNow
+    if (Office.context.authenticatedUser.getDisplayName()) {
+      console.log('Usuario autenticado: ' + Office.context.authenticatedUser.getDisplayName());
+
+      // Mostrar un mensaje de bienvenida al usuario
+      Office.context.ui.messageParent({
+        action: 'welcome',
+        data: {
+          title: 'Bienvenido, ' + Office.context.authenticatedUser.getDisplayName(),
+          description: 'Por favor, selecciona una acción para continuar.'
+        }
       });
 
+      // Agregar evento de selección de acción
+      Office.context.ui.addHandler('actionSelected', function (event) {
+        console.log('Evento actionSelected detectado');
+
+        // Obtener la acción seleccionada por el usuario
+        var action = event.data.action;
+
+        // Realizar la acción seleccionada (por ejemplo, llamar a una API ServiceNow)
+        switch (action) {
+          case 'mostrarInformacion':
+            mostrarInformacion();
+            break;
+          default:
+            console.log('Acción no reconocida');
+        }
+      });
+    } else {
+      console.log('Usuario no autenticado');
     }
+  });
+
+  // Función para mostrar información sobre el usuario
+  function mostrarInformacion() {
+    Office.context.ui.messageParent({
+      action: 'mostrarInformacion',
+      data: {
+        title: 'Información del usuario',
+        description: 'Nombre: ' + Office.context.authenticatedUser.getDisplayName()
+      }
+    });
   }
-  setTimeout(fetchFunction, 1000)
-  setTimeout(function () {
-    console.log('AAAAAAAAAAAAAAAAAA')
-    location = 'https://iadbdev.service-now.com/login.do'
-  }, 1500)
-}*/
+
+  // Agregar evento de inicio de sesión con ServiceNow
+  document.getElementById('miIframe').addEventListener('load', function () {
+    console.log('iFrame cargado');
+
+    // Obtener el objeto del iFrame (ServiceNow)
+    var iframe = document.getElementById('miIframe');
+    var win = iframe.contentWindow;
+
+    // Agregar evento de inicio de sesión con ServiceNow
+    win.addEventListener('message', function (event) {
+      console.log('Mensaje recibido desde ServiceNow');
+
+      // Verificar si el mensaje es un evento de inicio de sesión exitoso
+      if (event.data.type === 'loginSuccess') {
+        console.log('Inicio de sesión en ServiceNow exitoso');
+
+        // Mostrar un mensaje de bienvenida al usuario
+        Office.context.ui.messageParent({
+          action: 'welcome',
+          data: {
+            title: 'Bienvenido, ' + event.data.username,
+            description: 'Por favor, selecciona una acción para continuar.'
+          }
+        });
+
+        // Agregar evento de selección de acción
+        Office.context.ui.addHandler('actionSelected', function (event) {
+          console.log('Evento actionSelected detectado');
+
+          // Obtener la acción seleccionada por el usuario
+          var action = event.data.action;
+
+          // Realizar la acción seleccionada (por ejemplo, llamar a una API ServiceNow)
+          switch (action) {
+            case 'mostrarInformacion':
+              mostrarInformacion();
+              break;
+            default:
+              console.log('Acción no reconocida');
+          }
+        });
+      } else if (event.data.type === 'loginError') {
+        console.log('Inicio de sesión en ServiceNow fallido');
+
+        // Mostrar un mensaje de error al usuario
+        Office.context.ui.messageParent({
+          action: 'error',
+          data: {
+            title: 'Error al iniciar sesión en ServiceNow',
+            description: event.data.errorMessage
+          }
+        });
+      }
+    });
+  });
+});
