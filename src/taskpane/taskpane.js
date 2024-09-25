@@ -2,21 +2,12 @@
 let pca = undefined;
 Office.onReady(async (info) => {
   if (info.host) {
-    /* document.getElementById("sideload-msg").style.display = "none";
-     document.getElementById("app-body").style.display = "flex";
-     document.getElementById("run").onclick = run;
- */
-    // Initialize the public client application
     try {
 
       pca = new msal.PublicClientApplication({
         auth: {
-          // clientId: "f572234a40-33b8-4b2b-8470-44db5b7813fb",
-
-          // clientId: "f5721a48-33b8-4b2b-8478-44db5b7813fa",
-          clientId: "2c88968e-342a-4641-82fc-bee96c8667f8",
-
-          authority: "https://login.microsoftonline.com/9dfb1a05-5f1d-449a-8960-62abcb479e7d"
+          clientId: '637ff242-9444-4a30-9c55-e0b516887b4e',
+          authority: 'https://login.microsoftonline.com/f3df3acc-6a4a-4618-adfd-8828f324887f',
         },
       });
     } catch (e) {
@@ -29,7 +20,7 @@ Office.onReady(async (info) => {
 async function run() {
   // Specify minimum scopes needed for the access token.
   const tokenRequest = {
-    // scopes: ["Files.Read", "User.Read", "openid", "profile"],
+    scopes: ["Files.Read", "User.Read", "openid", "profile"],
     scopes: [],
   };
   let accessToken = null;
@@ -58,27 +49,11 @@ async function run() {
 
   // Call the Microsoft Graph API with the access token.
   const response = await fetch(
-    `https://iadbdev.service-now.com/login.do`,
+    `https://dev219430.service-now.com/login.do`,
     {
-      headers: { Authorization: accessToken },
+      headers: { Authorization: 'Bearer ' +accessToken },
     }
   );
   console.log('responseeeeeeeeeeeeeee', response)
-  /*if (response.ok) {
-    // Write file names to the console.
-    const data = await response.json();
-    const names = data.value.map((item) => item.name);
-
-    // Be sure the taskpane.html has an element with Id = item-subject.
-    const label = document.getElementById("item-subject");
-
-    // Write file names to task pane and the console.
-    const nameText = names.join(", ");
-    if (label) label.textContent = nameText;
-    console.log(nameText);
-  } else {
-    const errorText = await response.text();
-    console.error("Microsoft Graph call failed - error text: " + errorText);
-  }*/
 
 }
