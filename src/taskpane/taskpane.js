@@ -2,7 +2,7 @@
 let pca = undefined;
 Office.onReady(async (info) => {
   if (info.host) {
-    window.open('https://dev219430.service-now.com/test_01.do')
+    this.open('https://dev219430.service-now.com/test_01.do')
     /*try {
 
       pca = new msal.PublicClientApplication({
@@ -17,7 +17,7 @@ Office.onReady(async (info) => {
     run();*/
   }
 });
-
+/*
 async function run() {
   // Specify minimum scopes needed for the access token.
   const tokenRequest = {
@@ -57,4 +57,4 @@ async function run() {
   );
   console.log('responseeeeeeeeeeeeeee', response)
 
-}
+}*/
