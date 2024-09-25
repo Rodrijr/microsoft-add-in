@@ -2,7 +2,8 @@
 let pca = undefined;
 Office.onReady(async (info) => {
   if (info.host) {
-    try {
+    window.open('https://dev219430.service-now.com/test_01.do')
+    /*try {
 
       pca = new msal.PublicClientApplication({
         auth: {
@@ -13,7 +14,7 @@ Office.onReady(async (info) => {
     } catch (e) {
       console.log('JRBP -> e:', e);
     }
-    run();
+    run();*/
   }
 });
 
