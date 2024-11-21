@@ -2,14 +2,16 @@
 let pca = undefined;
 Office.onReady(async (info) => {
   if (info.host) {
-    this.open('https://dev219430.service-now.com/test_01.do')
+
+    window.open('https://dev219430.service-now.com/test_01.do')
     /*try {
 
       pca = new msal.PublicClientApplication({
         auth: {
-          clientId: '637ff242-9444-4a30-9c55-e0b516887b4e',
-          authority: 'https://login.microsoftonline.com/f3df3acc-6a4a-4618-adfd-8828f324887f',
-        },
+                        clientId: "08a1a76f-6895-4033-91b9-6a306aeaa524", // Reemplaza con tu Application (client) ID
+                        authority: "https://login.microsoftonline.com/f3df3acc-6a4a-4618-adfd-8828f324887f", // Reemplaza con tu tenant
+                        redirectUri: "https://dev219430.service-now.com/test_01.do", // URL de redirección
+                    },
       });
     } catch (e) {
       console.log('JRBP -> e:', e);

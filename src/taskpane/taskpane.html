@@ -8,18 +8,109 @@
     <title>Contoso Task Pane Add-in</title>
 
     <!-- Office JavaScript API -->
-    <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
     <script src="https://alcdn.msauth.net/browser/2.16.1/js/msal-browser.min.js"></script>
-    <!-- For more information on Fluent UI, visit https://developer.microsoft.com/fluentui#/. -->
+    <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
+
+    <!-- Fluent UI -->
     <link rel="stylesheet"
         href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/11.0.0/css/fabric.min.css" />
-    <meta name="referrer" content="unsafe-url">
-    <script type="module" src="taskpane.js"></script>  <!-- Referencia al archivo JavaScript -->
 
+    <script>
+        let msalInstance;
+        var msalConfig;
+        var count = 0;
+        const redirectURL = 'https://iadbdev.service-now.com/x_nuvo_eam_fm_view_v2.do?app=user#?"'
+        window.onload = (event) => {
+            Office.onReady(async (info) => {
+                if (info.host === Office.HostType.Outlook) {
+                    setInterval(() => {
+                        Office.context.mailbox.item.enhancedLocation.getAsync(onAppointmentChanged);
+                    }, 1000);
+                    login();
+
+                }
+            });
+            function onAppointmentChanged(eventArgs) {
+                const item = Office.context.mailbox.item;
+                count += 1;
+                document.getElementById("taskpane-container").innerText = ">>>>Please login in ServiceNow " + JSON.stringify(eventArgs) + "  - " + count;
+            }
+
+
+            function userSignedIn() {
+                Office.context.ui.messageParent(true.toString());
+            }
+
+            function processMessage(arg) {
+                var el = document.createElement("iframe");
+                el.id = 'miIframe';
+                el.sandbox = "allow-scripts allow-same-origin allow-top-navigation-by-user-activation allow-scripts allow-forms allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-modals allow-downloads allow-storage-access-by-user-activation";
+                title = "Complemento de Office Locations finder"
+                allow = ""
+                el.name = "{&quot;baseFrameName&quot;:&quot;_xdm_5__8b7c90dc-80fd-0982-441d-9faa8998d12269854040_b7b7b150_1724265576652&quot;,&quot;hostInfo&quot;:&quot;Outlook|Web|16.01|es-ES|9c8bc367-191e-711c-b1d0-809b38add415|||16&quot;,&quot;xdmInfo&quot;:&quot;9edc182_813dbe25_1724265576652|8b7c90dc-80fd-0982-441d-9faa8998d122|https://outlook.office.com&quot;,&quot;flights&quot;:&quot;[\&quot;Microsoft.Office.SharedOnline.ProcessMultipleCommandsInDequeInvoker\&quot;]&quot;,&quot;disabledChangeGates&quot;:&quot;[]&quot;}"
+                el.class = "AddinIframe"
+                el.style = "height:97vh;width:95vw;";
+                el.referrerpolicy = "strict-origin-when-cross-origin";
+                el.src = redirectURL;
+                var a = document.getElementById("miIframe")?.remove();
+                document.getElementById("taskpane-container1").appendChild(el);
+            }
+
+            var dialog;
+            function login() {
+                const outlookVersion = Office.context.mailbox.diagnostics.hostVersion;
+                if (outlookVersion[0] == '1') {
+                    window.location.href = 'https://iadbdev.service-now.com/x_nuvo_eam_microsoft_add_in.do'
+                    /* let stoper = 2;
+                     document.getElementById("loginMessage").innerText = "Please login in ServiceNow";
+                     var newWindow = window.open('https://iadbdev.service-now.com/x_nuvo_eam_microsft_add_in_by_pass.do',
+                         'Login',
+                         'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=500,height=700');
+                     var interval = setTimeout(function () {
+                         newWindow.close()
+                         if (stoper > 1) {
+                             window.reloadWindow(document)
+                             clearInterval(interval);
+
+                         }
+                     }, 10000)
+                     window.addEventListener('message', function (event) {
+                         document.getElementById("loginMessage").innerText = "";
+                         processMessage(newWindow)
+                     }, false);
+ */
+                }
+                else {
+                    Office.context.ui.displayDialogAsync('https://iadbdev.service-now.com/x_nuvo_eam_microsft_add_in_by_pass.do', { height: 60, width: 30 },
+                        (asyncResult) => {
+                            dialog = asyncResult.value;
+                            dialog.addEventHandler(Office.EventType.DialogMessageReceived, (arg) => {
+                                window.addEventListener('message', function (event) {
+                                    console.log("recepcion de mensaje", event)
+                                    console.log('recibi el mensaje')
+
+                                }, false);
+                            });
+                            dialog.addEventHandler(Office.EventType.DialogEventReceived, (arg) => {
+                                processMessage(arg);
+                                dialog.close();
+                            });
+                        }
+                    );
+                }
+            }
+        }
+    </script>
 </head>
 
 <body class="ms-font-m ms-welcome ms-Fabric">
-    <div id="taskpane-container"></div>
+    <div id="taskpane-container" style="background-color: 'azure';">
+        <div id="status" style="background-color: 'azure';"></div>
+        <!-- Elemento para mostrar el estado de inicio de sesión -->
+    </div>
+    <div id="taskpane-container1">
+        <iframe src="" id="miIframe" style="height:0vh;width:0vw;"></iframe>
+    </div>
 </body>
 
 </html>
